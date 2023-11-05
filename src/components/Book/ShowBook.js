@@ -3,13 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import './book.css'
 
 const ShowBook = ({ listBooks }) => {
-
+  // page
   const itemsPerPage = 20;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(listBooks.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentBooks = listBooks.slice(startIndex, endIndex);
+  // const currentBooks = listBooks.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -18,10 +17,78 @@ const ShowBook = ({ listBooks }) => {
   const handleRowClick = (bookId) => {
     navigate(`/book/${bookId}`);
   }
+  // filter
+  const categories = [...new Set(listBooks.map(book => book.bookDto.categoryDto.name))];
+  const brands = [...new Set(listBooks.map(book => book.branch.name))];
+
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+
+  const filteredByCategory = selectedCategories.length > 0
+    ? listBooks.filter(book => selectedCategories.includes(book.bookDto.categoryDto.name))
+    : listBooks;
+
+  const filteredByBrand = selectedBrands.length > 0
+    ? filteredByCategory.filter(book => selectedBrands.includes(book.branch.name))
+    : filteredByCategory;
+
+  const currentBooks = filteredByBrand.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(filteredByBrand.length / itemsPerPage);
+
+
+  const handleCategoryChange = (category) => {
+    const updatedCategories = [...selectedCategories];
+    if (updatedCategories.includes(category)) {
+      updatedCategories.splice(updatedCategories.indexOf(category), 1);
+    } else {
+      updatedCategories.push(category);
+    }
+    setSelectedCategories(updatedCategories);
+  };
+
+  const handleBrandChange = (brand) => {
+    const updatedBrands = [...selectedBrands];
+    if (updatedBrands.includes(brand)) {
+      updatedBrands.splice(updatedBrands.indexOf(brand), 1);
+    } else {
+      updatedBrands.push(brand);
+    }
+    setSelectedBrands(updatedBrands);
+  };
 
   return (
-    <div className='container scrollable-content'>
-      <div className='col-md-1'>
+    <div className='container'>
+      <div className=' row book-block'>
+      <div className='col-md-2'>
+        <div className="sidebar">
+          <div className="filter-group">
+            <h5>Danh mục</h5>
+            {categories.map(category => (
+              <label key={category} className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.includes(category)}
+                  onChange={() => handleCategoryChange(category)}
+                />
+                {category}
+              </label>
+            ))}
+          </div>
+          <div className="filter-group">
+            <h5>Thương hiệu</h5>
+            {brands.map(brand => (
+              <label key={brand} className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={selectedBrands.includes(brand)}
+                  onChange={() => handleBrandChange(brand)}
+                />
+                {brand}
+              </label>
+            ))}
+          </div>
+        </div>
       </div>
       <div className='col-md-10'>
         <table>
@@ -60,8 +127,8 @@ const ShowBook = ({ listBooks }) => {
           </div>
         </div>
       </div>
-      <div className='col-md-1'>
       </div>
+
     </div>
   );
 };

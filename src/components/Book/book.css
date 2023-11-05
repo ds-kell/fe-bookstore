@@ -65,10 +65,10 @@ tr:nth-child(odd) {
   color: #fff;
   font-weight: bold;
 }
-/*  */
-
-/* styles.css */
-.scrollable-content {
-  max-height: 100vh; /* Giới hạn chiều cao của phần tử */
-  overflow: hidden; /* Ẩn thanh cuộn */
+.checkbox-label{
+  display: inline-flex;
+  align-items: center;
+}
+.checkbox-label input {
+  margin-right: 10px;
 }

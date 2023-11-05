@@ -3,12 +3,17 @@
   background-color: #333;
   color: #fff;
 }
-
-.container {
-  display: flex;
+.menu-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+.container{
+  display: block;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
 }
 
 .navbar-brand {
