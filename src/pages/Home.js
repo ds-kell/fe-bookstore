@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Navbar from '../components/Navbar/Navbar'
 import { GetBook } from '../components/Book/GetBook';
 import './style.css'
 

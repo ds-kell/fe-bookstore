@@ -14,7 +14,7 @@ function Navbar() {
     <div className='menu-bar'>
       <nav className="navbar">
         <div className="container">
-          <Link to="/" className="navbar-brand">
+          <Link to="/home" className="navbar-brand">
             <span className="shop-name">VaAnh's Bookstore</span>
           </Link>
           <Link to="/book" className="navbar-brand">

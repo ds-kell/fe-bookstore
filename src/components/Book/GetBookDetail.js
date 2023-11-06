@@ -5,33 +5,37 @@ import { useParams } from 'react-router-dom';
 import ShowBookDetail from './ShowBookDetail';
 
 const accessToken = sessionStorage.getItem('token');
-
 let config = {};
-if (true) {
+if (accessToken) {
   config = {
-    method: 'GET',
-    headers: { Authorization: 'Bearer ' + 'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5OTEyMTUxOCwiZXhwIjoxNjk5MjA3OTE4fQ.zBeGlR460dfuRIETYVPi4fLvDaWA6n6_HfuAIxoamUh49g7Sjvypd0W4ziOvSLmp' }
+    method: "GET",
+    headers: { Authorization: "Bearer " + accessToken.slice(1,-1) },
   };
 }
-
 
 function GetBookDetail() {
   const [bookDetail, setBookDetail] = useState();
   const { bookId } = useParams();
   useEffect(() => {
-    async function fetchBookDetail() {
-      try {
-        if (bookId) {
+    async function fetchData() {
+      const accessToken = sessionStorage.getItem("token");
+      if (accessToken) {
+        const config = {
+          method: "GET",
+          headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
+        };
+
+        try {
           const response = await axios.get(`http://localhost:8088/api/private/book/${bookId}`, config);
-          console.log(response.data);
           setBookDetail(response.data.data);
+        } catch (error) {
+          console.error("Error fetching profile:", error);
         }
-      } catch (error) {
-        console.log(error);
+      } else {
+        console.log("No access token found.");
       }
     }
-
-    fetchBookDetail();
+    fetchData();
   }, [bookId]);
 
   return (

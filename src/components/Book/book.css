@@ -65,10 +65,18 @@ tr:nth-child(odd) {
   color: #fff;
   font-weight: bold;
 }
-.checkbox-label{
-  display: inline-flex;
+
+
+.checkbox-label {
+  display: block;
   align-items: center;
 }
+
 .checkbox-label input {
-  margin-right: 10px;
+  margin-right: 5px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
 }

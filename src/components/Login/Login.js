@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import './login.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import "./login.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // Hàm xử lý yêu cầu đăng nhập
 export async function loginUser(credentials) {
   try {
-    const response = await axios.post('http://localhost:8088/api/public/auth/login', credentials);
+    const response = await axios.post(
+      "http://localhost:8088/api/public/auth/login",
+      credentials
+    );
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -20,9 +23,9 @@ export async function loginUser(credentials) {
 }
 
 export default function Login({ setToken }) {
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const [shouldNavigate, setNavigate] = useState(false);
 
@@ -33,7 +36,7 @@ export default function Login({ setToken }) {
       if (response) {
         setToken(response);
         setNavigate(true);
-        localStorage.setItem('username', username);
+        localStorage.setItem("username", username);
       }
     } catch (error) {
       setError(error.message);
@@ -43,18 +46,28 @@ export default function Login({ setToken }) {
   // Hàm xử lý điều hướng sau khi đăng nhập thành công
   useEffect(() => {
     if (shouldNavigate) {
-      navigate('/home');
+      navigate("/home");
     }
   }, [shouldNavigate, navigate]);
 
   return (
-    <div className="login-container">
-      <form onSubmit={e => e.preventDefault()}>
-        <input type="text" placeholder="Username" onChange={e => setUserName(e.target.value)} />
-        <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-        <button onClick={handleLogin}>Đăng nhập</button>
-        {error && <div className="error">{error}</div>}
-      </form>
+    <div className="container">
+      <div className="login-container">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="text"
+            placeholder="Username"
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button onClick={handleLogin}>Đăng nhập</button>
+          {error && <div className="error">{error}</div>}
+        </form>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 import './bookdetail.css'
+import { Button } from "antd";
 
 const ShowBookDetail = ({ bookDetail }) => {
+  const [statusEdit, setStatusEdit] = useState(false);
+  const handleEdit = () => {
+    setStatusEdit(!statusEdit);
+  };
+  const handleUpdate = () => {
+    setStatusEdit(false);
+  };
+
     return (
         <div className='container'>
             <div className='book-detail-block'>

@@ -3,30 +3,36 @@ import React, { useState, useEffect } from 'react'
 import ShowBook from './ShowBook';
 
 const accessToken = sessionStorage.getItem('token');
-
 let config = {};
-if (true) {
+if (accessToken) {
   config = {
-    method: 'GET',
-    headers: { Authorization: 'Bearer ' + 'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5OTEyMTUxOCwiZXhwIjoxNjk5MjA3OTE4fQ.zBeGlR460dfuRIETYVPi4fLvDaWA6n6_HfuAIxoamUh49g7Sjvypd0W4ziOvSLmp'}
+    method: "GET",
+    headers: { Authorization: "Bearer " + accessToken.slice(1,-1) },
   };
 }
-
 function GetBook() {
   const [listBooks, setListBooks] = useState([]);
-
   useEffect(() => {
+    const accessToken = sessionStorage.getItem('token');
     async function fetchData() {
-      try {
-        const response = await axios.get('http://localhost:8088/api/private/book/all-book-detail', config);
-        setListBooks(response.data.data);
-      } catch (error) {
-        console.log(error);
+      if (accessToken) {
+        const config = {
+          method: "GET",
+          headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
+        };
+        try {
+          const response = await axios.get('http://localhost:8088/api/private/book/all-book-detail', config);
+          setListBooks(response.data.data);
+        } catch (error) {
+          console.error("Error fetching profile:", error);
+        }
+      } else {
+        console.log("No access token found.");
       }
     }
-
     fetchData();
   }, []);
+
 
   return (
     <div>

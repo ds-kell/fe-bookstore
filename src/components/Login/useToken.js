@@ -18,15 +18,15 @@ export default function useToken() {
   const saveToken = (userToken) => {
 
     const userTokenString = JSON.stringify({
-      accessToken: JSON.stringify(userToken.data.accessToken),
-      refreshToken: JSON.stringify(userToken.data.refreshToken)
+      accessToken: userToken.data.accessToken,
+      refreshToken: userToken.data.refreshToken
     });
 
     setToken(userToken.data.accessToken);
     setTokenStorage(userTokenString);
 
-    sessionStorage.setItem('userToken', userTokenString);
-    sessionStorage.setItem('token', userToken.data.accessToken);
+    sessionStorage.setItem('tokenStorage', userTokenString);
+    sessionStorage.setItem('token', JSON.stringify(userToken.data.accessToken));
   };
 
   return {
