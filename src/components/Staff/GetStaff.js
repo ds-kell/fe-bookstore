@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import ShowBook from './ShowBook';
-
-function GetBook() {
-  const [listBooks, setListBooks] = useState([]);
+import ShowStaff from './ShowStaff';
+function GetStaff() {
+  const [listStaffs, setListStaffs] = useState([]);
   useEffect(() => {
     const accessToken = localStorage.getItem('token');
     async function fetchData() {
@@ -13,8 +12,8 @@ function GetBook() {
           headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
         };
         try {
-          const response = await axios.get('http://localhost:8088/api/private/book/all-book-detail', config);
-          setListBooks(response.data.data);
+          const response = await axios.get('http://localhost:8088/api/private/all-user', config);
+          setListStaffs(response.data.data);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -28,9 +27,9 @@ function GetBook() {
 
   return (
     <div>
-      <ShowBook listBooks={listBooks} />
+      <ShowStaff listStaffs={listStaffs} />
     </div>
   )
 }
 
-export { GetBook };
+export default GetStaff;

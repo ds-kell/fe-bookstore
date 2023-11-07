@@ -16,18 +16,31 @@
   align-items: center;
 }
 
-.navbar-brand {
+.nav-item{
   text-decoration: none;
   font-size: 24px;
+  color: wheat;
 }
-
+.nav-item:hover {
+  color: #fff;
+}
+.nav-item:hover{
+  color: white;
+}
+.nav-item:active {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0 5px 0 5px;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 10px;
+}
 .shop-name {
   font-weight: bold;
   font-size: 28px;
   color: #ff6600;
 }
 
-.navbar-search {
+.nav-search {
   display: flex;
   align-items: center;
 }
@@ -51,10 +64,12 @@
   cursor: pointer;
   margin-left: 10px;
 }
-.nav-element{
-  color: #fff;
-}
 
+.nav-icon{
+  color: wheat;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
 /* username */
 .profile-link {
   text-decoration: none;

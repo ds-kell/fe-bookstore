@@ -1,5 +1,3 @@
-/* styles.css */
-
 .book-detail-block {
   max-width: 600px;
   margin: 0 auto;
@@ -10,17 +8,21 @@
   background-color: #fff;
 }
 
-h1 {
+.book-detail-block h1 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-p {
+.book-detail-block p {
   font-size: 16px;
   margin: 8px 0;
 }
 
-/* Customize styles for specific elements as needed */
 .sidebar {
   position: fixed;
+}
+.btn-bookdetail{
+  display: block;
+  margin: 0px 0 20px 0;
+  width: 200px;
 }

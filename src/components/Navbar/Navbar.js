@@ -1,35 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { BsFillBookFill, BsFillPeopleFill } from "react-icons/bs";
+import { FcStatistics } from "react-icons/fc";
 import "./navbar.css";
 
 function Navbar() {
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
   const logout = () => {
-    sessionStorage.clear("token");
+    localStorage.clear("token");
   };
 
   return (
-    <div className='menu-bar'>
+    <div className="menu-bar">
       <nav className="navbar">
         <div className="container">
-          <Link to="/home" className="navbar-brand">
+          <Link to="/home" className="nav-item">
             <span className="shop-name">VaAnh's Bookstore</span>
           </Link>
-          <Link to="/book" className="navbar-brand">
+          <Link to="/book" className="nav-item">
+            <BsFillBookFill className="nav-icon" />
             <span className="nav-element">Book</span>
           </Link>
-          <Link to="/proposal" className="navbar-brand">
-            <span className="nav-element">Proposal</span>
+          <Link to="/branch" className="nav-item">
+            <BsFillPeopleFill className="nav-icon" />
+            <span className="nav-element">Branch</span>
           </Link>
-          <Link to="/staff" className="navbar-brand">
+          <Link to="/staff" className="nav-item">
+            <BsFillPeopleFill className="nav-icon" />
             <span className="nav-element">Staff</span>
           </Link>
-          <Link to="/statistic" className="navbar-brand">
+          <Link to="/statistic" className="nav-item">
+            <FcStatistics className="nav-icon" />
             <span className="nav-element">Statistic</span>
           </Link>
-          <div className="navbar-search">
+          <div className="nav-search">
             <form className="form-inline">
               <input
                 type="text"
@@ -42,16 +48,13 @@ function Navbar() {
             </form>
           </div>
           <div>
-            <Link to='profile' className="profile-link">
-              <span className="profile-circle">
-                {username}
-              </span>
+            <Link to="profile" className="profile-link">
+              <span className="profile-circle">{username}</span>
             </Link>
           </div>
         </div>
       </nav>
     </div>
-
   );
 }
 export default Navbar;

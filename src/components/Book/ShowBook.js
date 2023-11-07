@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { TbCategory } from "react-icons/tb";
+import { MdOutlineFactory } from "react-icons/md";
 import "./book.css";
 
 const ShowBook = ({ listBooks }) => {
@@ -21,10 +23,10 @@ const ShowBook = ({ listBooks }) => {
   const categories = [
     ...new Set(listBooks.map((book) => book.bookDto.categoryDto.name)),
   ];
-  const brands = [...new Set(listBooks.map((book) => book.branch.name))];
+  const branches = [...new Set(listBooks.map((book) => book.branch.name))];
 
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedBranches, setSelectedBranches] = useState([]);
 
   const filteredByCategory =
     selectedCategories.length > 0
@@ -33,15 +35,15 @@ const ShowBook = ({ listBooks }) => {
         )
       : listBooks;
 
-  const filteredByBrand =
-    selectedBrands.length > 0
+  const filteredByBranch =
+    selectedBranches.length > 0
       ? filteredByCategory.filter((book) =>
-          selectedBrands.includes(book.branch.name)
+          selectedBranches.includes(book.branch.name)
         )
       : filteredByCategory;
 
-  const currentBooks = filteredByBrand.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(filteredByBrand.length / itemsPerPage);
+  const currentBooks = filteredByBranch.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(filteredByBranch.length / itemsPerPage);
 
   const handleCategoryChange = (category) => {
     const updatedCategories = [...selectedCategories];
@@ -53,14 +55,14 @@ const ShowBook = ({ listBooks }) => {
     setSelectedCategories(updatedCategories);
   };
 
-  const handleBrandChange = (brand) => {
-    const updatedBrands = [...selectedBrands];
-    if (updatedBrands.includes(brand)) {
-      updatedBrands.splice(updatedBrands.indexOf(brand), 1);
+  const handleBranchChange = (branch) => {
+    const updatedBranches = [...selectedBranches];
+    if (updatedBranches.includes(branch)) {
+      updatedBranches.splice(updatedBranches.indexOf(branch), 1);
     } else {
-      updatedBrands.push(brand);
+      updatedBranches.push(branch);
     }
-    setSelectedBrands(updatedBrands);
+    setSelectedBranches(updatedBranches);
   };
 
   return (
@@ -69,7 +71,10 @@ const ShowBook = ({ listBooks }) => {
         <div className="col-sm-4 col-md-2 col-lg-2">
           <div className="sidebar">
             <div className="filter-group">
-              <h5>Danh mục</h5>
+              <div className="filter-title">
+                <TbCategory className="filter-icon" />
+                <h5>Category</h5>
+              </div>
               <div className="filter-item">
                 {categories.map((category) => (
                   <label key={category} className="checkbox-label">
@@ -84,16 +89,19 @@ const ShowBook = ({ listBooks }) => {
               </div>
             </div>
             <div className="filter-group">
-              <h5>Thương hiệu</h5>
+              <div className="filter-title">
+                <MdOutlineFactory className="filter-icon" />
+                <h5>Branch</h5>
+              </div>
               <div className="filter-item">
-                {brands.map((brand) => (
-                  <label key={brand} className="checkbox-label">
+                {branches.map((branch) => (
+                  <label key={branch} className="checkbox-label">
                     <input
                       type="checkbox"
-                      checked={selectedBrands.includes(brand)}
-                      onChange={() => handleBrandChange(brand)}
+                      checked={selectedBranches.includes(branch)}
+                      onChange={() => handleBranchChange(branch)}
                     />
-                    {brand}
+                    {branch}
                   </label>
                 ))}
               </div>

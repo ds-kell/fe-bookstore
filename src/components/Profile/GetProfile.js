@@ -7,7 +7,7 @@ function GetProfile() {
   const [profile, setProfile] = useState();
   useEffect(() => {
     async function fetchData() {
-      const accessToken = sessionStorage.getItem('token');
+      const accessToken = localStorage.getItem('token');
       if (accessToken) {
         const config = {
           method: "GET",
@@ -18,7 +18,7 @@ function GetProfile() {
           const response = await axios.get("http://localhost:8088/api/private/user/info", config);
           setProfile(response.data.data);
         } catch (error) {
-          console.error("Error fetching profile:", error);
+          console.error("Error fetching data:", error);
         }
       } else {
         console.log("No access token found.");

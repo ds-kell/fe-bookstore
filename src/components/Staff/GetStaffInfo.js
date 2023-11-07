@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import ShowBookDetail from './ShowBookDetail';
+import ShowStaffInfo from './ShowStaffInfo.js';
 
-function GetBookDetail() {
-  const [bookDetail, setBookDetail] = useState();
-  const { bookId } = useParams();
+function GetStaffInfo() {
+  const [staffInfo, setStaffInfo] = useState();
+  const { userId } = useParams();
   useEffect(() => {
     async function fetchData() {
       const accessToken = localStorage.getItem("token");
@@ -16,8 +16,8 @@ function GetBookDetail() {
         };
 
         try {
-          const response = await axios.get(`http://localhost:8088/api/private/book/${bookId}`, config);
-          setBookDetail(response.data.data);
+          const response = await axios.get(`http://localhost:8088/api/private/user/${userId}`, config);
+          setStaffInfo(response.data.data);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -26,16 +26,16 @@ function GetBookDetail() {
       }
     }
     fetchData();
-  }, [bookId]);
+  }, [userId]);
 
   return (
     <div className='container'>
       <div className=''>
-        {bookDetail ? <ShowBookDetail bookDetail={bookDetail} /> : <p>Loading...</p>}
+        {staffInfo ? <ShowStaffInfo staff={staffInfo} /> : <p>Loading...</p>}
       </div>
     </div>
   );
 }
 
-export default GetBookDetail;
+export default GetStaffInfo;
 

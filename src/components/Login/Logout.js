@@ -11,10 +11,10 @@ export default function Logout() {
     // alert('Bạn chắc chắn muốn đăng xuất!');
     sessionStorage.clear();
     localStorage.clear();
-    window.location.href = '/';
+    window.location.href = '/login';
   }
   return (
-    <a href="/" onClick={logout}>
+    <a href="/login" onClick={logout}>
     Đăng xuất
     </a>
   );

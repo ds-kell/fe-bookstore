@@ -28,7 +28,7 @@ tr:nth-child(odd) {
   background-color: #ffffff;
 }
 .table-row:hover {
-  background-color: rgb(92, 161, 234);
+  background-color: #ccc;
   cursor: pointer; 
 }
 
@@ -79,4 +79,12 @@ tr:nth-child(odd) {
 .checkbox-label input[type="checkbox"] {
   width: 15px;
   height: 15px;
+}
+.filter-title{
+  display: flex;
+}
+.filter-icon{
+  margin-top: 4px;
+  margin-right: 5px;
+  font-size: 18px;
 }

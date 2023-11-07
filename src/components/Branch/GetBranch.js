@@ -2,20 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react'
 
-const accessToken = sessionStorage.getItem('token');
-let config = {};
-if (accessToken) {
-  config = {
-    method: "GET",
-    headers: { Authorization: "Bearer " + accessToken.slice(1,-1) },
-  };
-}
 
 function GetBranch() {
   const [listBranches, setListBranches] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const accessToken = sessionStorage.getItem('token');
+      const accessToken = localStorage.getItem('token');
       if (accessToken) {
         const config = {
           method: "GET",
