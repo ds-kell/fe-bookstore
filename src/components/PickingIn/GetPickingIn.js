@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react'
 
 
-function GetProposal() {
-    const [listProposals, setListProposals] = useState([]);
+function GetPickingIn() {
+    const [listPickingIns, setListPickingIns] = useState([]);
     useEffect(() => {
         async function fetchData() {
             const accessToken = localStorage.getItem('token');
@@ -15,8 +15,8 @@ function GetProposal() {
                 };
 
                 try {
-                    const response = await axios.get('http://localhost:8088/api/private/proposal/all-proposal', config);
-                    setListProposals(response.data.data);
+                    const response = await axios.get('http://localhost:8088/api/private/picking-in/all-picking-in', config);
+                    setListPickingIns(response.data.data);
                 } catch (error) {
                     console.error("Error fetching data:", error);
                 }
@@ -29,9 +29,9 @@ function GetProposal() {
 
     return (
     <div>
-            {/* <ShowProposal listProposals={listProposals} /> */}
+            {/* <ShowPickingIn listPickingIns={listPickingIns} /> */}
     </div>
     )
 }
 
-export { GetProposal };
+export { GetPickingIn };
