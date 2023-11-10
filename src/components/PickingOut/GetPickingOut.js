@@ -15,7 +15,7 @@ function GetPickingOut() {
                 };
 
                 try {
-                    const response = await axios.get('http://localhost:8088/api/private/picking-out/all-picking-out', config);
+                    const response = await axios.get('http://localhost:8088/api/public/picking-out/all-picking-out', config);
                     setListPickingOuts(response.data.data);
                 } catch (error) {
                     console.error("Error fetching data:", error);

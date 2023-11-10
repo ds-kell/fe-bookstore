@@ -16,7 +16,6 @@ export default function useToken() {
   const [token, setToken] = useState(getToken());
 
   const saveToken = (userToken) => {
-
     const userTokenString = JSON.stringify({
       accessToken: userToken.data.accessToken,
       refreshToken: userToken.data.refreshToken
