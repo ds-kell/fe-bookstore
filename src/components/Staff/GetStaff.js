@@ -11,6 +11,7 @@ function GetStaff() {
           method: "GET",
           headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
         };
+        console.log(config)
         try {
           const response = await axios.get('http://localhost:8088/api/private/all-user', config);
           setListStaffs(response.data.data);

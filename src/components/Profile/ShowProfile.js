@@ -21,6 +21,14 @@ const ShowProfile = ({ profile }) => {
     setDob(event.target.value);
   };
 
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear('token');
+    localStorage.clear('userToken');
+    navigate('/login');
+  }
+
   return (
     <div className="container">
       <div className="profile-container">
@@ -86,6 +94,13 @@ const ShowProfile = ({ profile }) => {
           htmlType="submit"
         >
           Save
+        </Button>
+        <Button
+          className="btn-antd"
+          onClick={logout}
+          htmlType="submit"
+        >
+          Logout
         </Button>
         </div>
       </div>
