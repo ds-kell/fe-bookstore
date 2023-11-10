@@ -27,7 +27,7 @@
 .nav-item:hover{
   color: white;
 }
-.nav-item:active {
+.nav-item:active, .nav-item:hover {
   background-color: #007bff;
   color: #fff;
   padding: 0 5px 0 5px;

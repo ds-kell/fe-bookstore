@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { TbCategory } from "react-icons/tb";
 import { MdOutlineFactory } from "react-icons/md";
 import "./book.css";
+import { Button } from "antd";
 
 const ShowBook = ({ listBooks }) => {
   // page
@@ -19,6 +20,7 @@ const ShowBook = ({ listBooks }) => {
   const handleRowClick = (bookId) => {
     navigate(`/book/${bookId}`);
   };
+
   // filter
   const categories = [
     ...new Set(listBooks.map((book) => book.bookDto.categoryDto.name)),
@@ -108,7 +110,7 @@ const ShowBook = ({ listBooks }) => {
             </div>
           </div>
         </div>
-        <div className=" col-sm-8 col-md-10 col-lg-10">
+        <div className=" col-sm-8 col-md-8 col-lg-8">
           <table>
             <thead>
               <tr>
@@ -153,6 +155,7 @@ const ShowBook = ({ listBooks }) => {
             </div>
           </div>
         </div>
+        <div className="col-sm-0 col-md-2 col-lg-2"></div>
       </div>
     </div>
   );
