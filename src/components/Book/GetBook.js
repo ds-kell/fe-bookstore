@@ -28,7 +28,7 @@ function GetBook() {
 
   return (
     <div>
-      <ShowBook listBooks={listBooks} />
+      {listBooks ? <ShowBook listBooks={listBooks} /> : <p>Loading...</p>}
     </div>
   )
 }

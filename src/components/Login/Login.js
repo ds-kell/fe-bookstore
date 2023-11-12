@@ -23,10 +23,19 @@ export async function loginUser(credentials) {
 }
 
 export default function Login({ setToken }) {
+  const navigate = useNavigate();
+
+  // const accessToken = localStorage.getItem("token");
+
+  // useEffect(() => {
+  //   if (accessToken) {
+  //     navigate("/");
+  //   }
+  // }, [accessToken, navigate]);
+
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
   const [shouldNavigate, setNavigate] = useState(false);
 
   // Hàm xử lý khi nhấn nút Đăng nhập

@@ -17,8 +17,8 @@ const ShowBook = ({ listBooks }) => {
   };
 
   const navigate = useNavigate();
-  const handleRowClick = (bookId) => {
-    navigate(`/book/${bookId}`);
+  const handleRowClick = (bookDetailId) => {
+    navigate(`/book/detail/${bookDetailId}`);
   };
 
   // filter
@@ -33,15 +33,15 @@ const ShowBook = ({ listBooks }) => {
   const filteredByCategory =
     selectedCategories.length > 0
       ? listBooks.filter((book) =>
-          selectedCategories.includes(book.bookDto.categoryDto.name)
-        )
+        selectedCategories.includes(book.bookDto.categoryDto.name)
+      )
       : listBooks;
 
   const filteredByBranch =
     selectedBranches.length > 0
       ? filteredByCategory.filter((book) =>
-          selectedBranches.includes(book.branch.name)
-        )
+        selectedBranches.includes(book.branch.name)
+      )
       : filteredByCategory;
 
   const currentBooks = filteredByBranch.slice(startIndex, endIndex);
@@ -66,6 +66,20 @@ const ShowBook = ({ listBooks }) => {
     }
     setSelectedBranches(updatedBranches);
   };
+
+  // 
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredBySearch = searchTerm
+    ? filteredByBranch.filter((bookDetail) =>
+      bookDetail.bookDto.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    : filteredByBranch;
 
   return (
     <div className="container">
@@ -111,6 +125,14 @@ const ShowBook = ({ listBooks }) => {
           </div>
         </div>
         <div className=" col-sm-8 col-md-8 col-lg-8">
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search by book name"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
           <table>
             <thead>
               <tr>
@@ -123,18 +145,18 @@ const ShowBook = ({ listBooks }) => {
               </tr>
             </thead>
             <tbody>
-              {currentBooks.map((book) => (
+              {filteredBySearch.map((bookDetail) => (
                 <tr
-                  key={book.id}
-                  onClick={() => handleRowClick(book.id)}
+                  key={bookDetail.id}
+                  onClick={() => handleRowClick(bookDetail.id)}
                   className="table-row"
                 >
-                  <td>{book.bookDto.name}</td>
-                  <td>{book.bookDto.importPrice}</td>
-                  <td>{book.bookDto.exportPrice}</td>
-                  <td>{book.quantity}</td>
-                  <td>{book.bookDto.categoryDto.name}</td>
-                  <td>{book.branch.name}</td>
+                  <td>{bookDetail.bookDto.name}</td>
+                  <td>{bookDetail.bookDto.importPrice}</td>
+                  <td>{bookDetail.bookDto.exportPrice}</td>
+                  <td>{bookDetail.quantity}</td>
+                  <td>{bookDetail.bookDto.categoryDto.name}</td>
+                  <td>{bookDetail.branch.name}</td>
                 </tr>
               ))}
             </tbody>
@@ -145,9 +167,8 @@ const ShowBook = ({ listBooks }) => {
                 <button
                   key={index + 1}
                   onClick={() => handlePageChange(index + 1)}
-                  className={`page-button ${
-                    currentPage === index + 1 ? "active" : ""
-                  }`}
+                  className={`page-button ${currentPage === index + 1 ? "active" : ""
+                    }`}
                 >
                   {index + 1}
                 </button>

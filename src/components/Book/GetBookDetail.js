@@ -5,7 +5,7 @@ import ShowBookDetail from './ShowBookDetail';
 
 function GetBookDetail() {
   const [bookDetail, setBookDetail] = useState();
-  const { bookId } = useParams();
+  const { bookDetailId } = useParams();
   useEffect(() => {
     async function fetchData() {
       const accessToken = localStorage.getItem("token");
@@ -16,7 +16,7 @@ function GetBookDetail() {
         };
 
         try {
-          const response = await axios.get(`http://localhost:8088/api/private/book/${bookId}`, config);
+          const response = await axios.get(`http://localhost:8088/api/private/book/detail/${bookDetailId}`, config);
           setBookDetail(response.data.data);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -26,7 +26,7 @@ function GetBookDetail() {
       }
     }
     fetchData();
-  }, [bookId]);
+  }, [bookDetailId]);
 
   return (
     <div className='container'>

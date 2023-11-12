@@ -12,34 +12,33 @@ const ShowBookDetail = ({ bookDetail }) => {
     navigate("import");
   };
   const handleEditClick = (bookId) => {
-    navigate("edit");
+    navigate("/book/edit");
   };
-  const handleProposalClick = (bookId) => {
-    navigate("create-proposal");
+  const handleProposalClick = (bookDetailId) => {
+    navigate(`/book/create-proposal/${bookDetailId}`);
   };
-  const handlePickingOutClick = (bookId) => {
-    navigate("picking-out");
+  const handlePickingOutClick = (bookDetailId) => {
+    navigate(`/book/picking-out/${bookDetailId}`);
   };
-  const handlePickingInClick = (bookId) => {
-    navigate("picking-in");
+  const handlePickingInClick = (bookDetailId) => {
+    navigate(`/book/picking-in/${bookDetailId}`);
   };
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-2"></div>
+      <div className="col-md-2"></div>
         <div className="col-md-4">
           <div className="book-detail-block">
-            <h1>Book Details</h1>
-            <p>Book Name: {bookDetail.bookDto.name}</p>
-            <p>Import Price: {bookDetail.bookDto.importPrice}</p>
-            <p>Export Price: {bookDetail.bookDto.exportPrice}</p>
+            <h2>{bookDetail.bookDto.name}</h2>
+            <p>Import price: {bookDetail.bookDto.importPrice}</p>
+            <p>Export price: {bookDetail.bookDto.exportPrice}</p>
             <p>Quantity: {bookDetail.quantity}</p>
-            <p>Category Name: {bookDetail.bookDto.categoryDto.name}</p>
-            <p>Branch Name: {bookDetail.branch.name}</p>
-            <p>Branch Address: {bookDetail.branch.address}</p>
+            <p>Category: {bookDetail.bookDto.categoryDto.name}</p>
+            <p>Branch: {bookDetail.branch.name}</p>
+            <p>Address: {bookDetail.branch.address}</p>
           </div>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-4">
           <Button
             className="btn-bookdetail"
             onClick={() => handleEditClick(bookDetail.bookDto.id)}
@@ -48,25 +47,19 @@ const ShowBookDetail = ({ bookDetail }) => {
           </Button>
           <Button
             className="btn-bookdetail"
-            onClick={() => handleImportClick(bookDetail.bookDto.id)}
-          >
-            Import book
-          </Button>
-          <Button
-            className="btn-bookdetail"
-            onClick={() => handleProposalClick(bookDetail.bookDto.id)}
+            onClick={() => handleProposalClick(bookDetail.id)}
           >
             Create proposal
           </Button>
           <Button
             className="btn-bookdetail"
-            onClick={() => handlePickingOutClick()}
+            onClick={() => handlePickingOutClick(bookDetail.id)}
           >
             Picking out
           </Button>
           <Button
             className="btn-bookdetail"
-            onClick={() => handlePickingInClick()}
+            onClick={() => handlePickingInClick(bookDetail.id)}
           >
             Picking in
           </Button>

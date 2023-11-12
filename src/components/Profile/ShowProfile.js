@@ -84,24 +84,24 @@ const ShowProfile = ({ profile }) => {
           </div>
         </div>
         <div className="btn-profile">
-        <Button className="btn-antd" onClick={handleEdit}>
-          {statusEdit ? "Cancel" : "Edit"}
-        </Button>
-        <Button
-          className="btn-antd"
-          disabled={!statusEdit}
-          onClick={handleUpdate}
-          htmlType="submit"
-        >
-          Save
-        </Button>
-        <Button
-          className="btn-antd"
-          onClick={logout}
-          htmlType="submit"
-        >
-          Logout
-        </Button>
+          <Button className="btn-antd" onClick={handleEdit}>
+            {statusEdit ? "Cancel" : "Edit"}
+          </Button>
+          <Button
+            className="btn-antd"
+            disabled={!statusEdit}
+            onClick={handleUpdate}
+            htmlType="submit"
+          >
+            Save
+          </Button>
+          <Button
+            className="btn-antd"
+            onClick={logout}
+            htmlType="submit"
+          >
+            Logout
+          </Button>
         </div>
       </div>
     </div>
