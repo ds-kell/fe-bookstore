@@ -5,5 +5,20 @@
 .btn-book {
     display: block;
     margin: 0px 0 20px 0;
+    color: white;
+    background-color: #6A2A4B;
+}
+.tab-item{
+    display: flexbox;
+    background-color: #6A2A4B;
     width: 200px;
+    color: white;
+    align-items: center;
+    padding: 15px 0 15px 0;
+    margin: 0 5px 10px 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+.tab-inline{
+    display: flex;
 }

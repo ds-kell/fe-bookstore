@@ -28,7 +28,7 @@
   color: white;
 }
 .nav-item:active, .nav-item:hover {
-  background-color: #007bff;
+  background-color: #C4ADFA;
   color: #fff;
   padding: 0 5px 0 5px;
   border: 2px solid rgb(255, 255, 255);
@@ -57,9 +57,10 @@
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: #6A2A4B;
   color: #fff;
   border: none;
+  padding: 5px 15px 5px 15px;
   border-radius: 5px;
   cursor: pointer;
   margin-left: 10px;

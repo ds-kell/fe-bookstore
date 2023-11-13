@@ -11,7 +11,7 @@
 }
 
 .staff-table th {
-  background-color: #f2f2f2;
+  background-color: #6A2A4B;
 }
 
 .staff-table tr:nth-child(even) {
@@ -24,4 +24,6 @@
 .btn-staff{
   width: 150px;
   display: flex;
+  color: white;
+  background-color: #6A2A4B;
 }

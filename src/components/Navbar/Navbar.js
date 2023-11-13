@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsFillBookFill, BsFillPeopleFill } from "react-icons/bs";
 import { FcStatistics } from "react-icons/fc";
+import {Button} from "antd"
 import "./navbar.css";
 
 function Navbar() {
@@ -44,7 +45,7 @@ function Navbar() {
                     className="form-control mr-2"
                     placeholder="Search"
                   />
-                  <button className="btn btn-primary" type="submit">
+                  <button className="btn-primary" type="submit">
                     Search
                   </button>
                 </form>

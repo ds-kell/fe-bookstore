@@ -16,7 +16,11 @@ import StaffInfo from "./pages/StaffInfo";
 import PagePostPickingOut from "./pages/PagePostPickingOut";
 import PagePostPickingIn from "./pages/PagePostPickingIn";
 import PagePostProposal from "./pages/PagePostProposal";
-import Book from "./pages/Book";
+import BookPage from "./pages/BookPage";
+import AllBook from "./pages/AllBook";
+import TabMenuBook from "./pages/TabMenuBook";
+import CreateBook from "./pages/CreateBook";
+import CreateProposal from "./pages/CreateProposal";
 
 function App() {
   const { setToken, tokenStorage, token } = useToken();
@@ -32,14 +36,18 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/book" element={<Book />} />
+        <Route path="/book" element={<TabMenuBook />} />
+        <Route path="/book/view-book" element={<AllBook />} />
+        <Route path="/book/create-book" element={<CreateBook />} />
+        <Route path="/book/create-proposal" element={<CreateProposal />} />
+       
         <Route path="/" element={<AuthRouter />}>
           <Route index element={<Home />} />
         </Route>
         <Route path="/book/detail/:bookDetailId" element={<BookDetail />} />
 
         <Route path="/book/picking-out/:bookDetailId" element={<PagePostPickingOut />} />
-
+    
         <Route path="/book/picking-in/:bookDetailId" element={<PagePostPickingIn />} />
 
         <Route path="/book/create-proposal/:bookDetailId" element={<PagePostProposal />} />

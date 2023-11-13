@@ -119,8 +119,8 @@ function PostPickingIn() {
                                 <p>Export price: {bookDetail.bookDto.exportPrice}</p>
                                 <p>Quantity: {bookDetail.quantity}</p>
                                 <p>Category: {bookDetail.bookDto.categoryDto.name}</p>
-                                <p>Branch: {bookDetail.branch.name}</p>
-                                <p>Address: {bookDetail.branch.address}</p>
+                                <p>Branch: {bookDetail.branchDto.name}</p>
+                                <p>Address: {bookDetail.branchDto.address}</p>
                             </div>
                         ) : (
                             <p>Loading...</p>

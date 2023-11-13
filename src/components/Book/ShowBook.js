@@ -25,8 +25,7 @@ const ShowBook = ({ listBooks }) => {
   const categories = [
     ...new Set(listBooks.map((book) => book.bookDto.categoryDto.name)),
   ];
-  const branches = [...new Set(listBooks.map((book) => book.branch.name))];
-
+  const branches = [...new Set(listBooks.map((book) => book.branchDto.name))];
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedBranches, setSelectedBranches] = useState([]);
 
@@ -40,7 +39,7 @@ const ShowBook = ({ listBooks }) => {
   const filteredByBranch =
     selectedBranches.length > 0
       ? filteredByCategory.filter((book) =>
-        selectedBranches.includes(book.branch.name)
+        selectedBranches.includes(book.branchDto.name)
       )
       : filteredByCategory;
 
@@ -156,7 +155,7 @@ const ShowBook = ({ listBooks }) => {
                   <td>{bookDetail.bookDto.exportPrice}</td>
                   <td>{bookDetail.quantity}</td>
                   <td>{bookDetail.bookDto.categoryDto.name}</td>
-                  <td>{bookDetail.branch.name}</td>
+                  <td>{bookDetail.branchDto.name}</td>
                 </tr>
               ))}
             </tbody>
