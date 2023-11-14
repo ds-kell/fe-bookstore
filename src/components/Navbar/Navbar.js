@@ -22,7 +22,7 @@ function Navbar() {
               <Link to="/home" className="nav-item">
                 <span className="shop-name">VaAnh's Bookstore</span>
               </Link>
-              <Link to="/book" className="nav-item">
+              <Link to="/book/view-book" className="nav-item">
                 <BsFillBookFill className="nav-icon" />
                 <span className="nav-element">Book</span>
               </Link>

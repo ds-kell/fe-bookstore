@@ -1,109 +1,72 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "antd";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Outlet, useNavigate } from "react-router-dom";
 import "./style.css";
-import AllBook from "./AllBook";
 
 function TabMenuBook() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("tab1");
-  const handleViewBookClick = () => {
-    navigate("/book/view-book");
-  };
-  const handleViewBookDetailClick = () => {
-    navigate("/book/view-book-detail");
-  };
-  const handleCreateBookClick = () => {
-    navigate("/book/create-book");
-  };
-  const handleProposalClick = () => {
-    navigate(`/book/create-proposal`);
-  };
-  const handlePickingOutClick = () => {
-    navigate(`/book/picking-out`);
-  };
-  const handlePickingInClick = () => {
-    navigate(`/book/picking-in`);
-  };
   const [currentTab, setCurrentTab] = useState("1");
-
-//   const handleTabClick = (tab) => {
-//     setCurrentTab(tab.id);
-//     navigate(tab.url);
-//   };
   const tabs = [
     {
-      id: '1',
+      id: "1",
       tabTitle: "View book",
-      url: "view-book",
-      content: "AllBook",
+      url: "/book/view-book",
+      bgcolor: "#6A2A4B",
+      color: "#ffffff"
     },
     {
-      id: '2',
+      id: "2",
       tabTitle: "Create book",
-      url: "view-book",
-      content: "AllBook",
+      url: "/book/create-book",
+      bgcolor: "#6A2A4B",
+      color: "#ffffff"
     },
     {
-      id: '3',
+      id: "3",
       tabTitle: "Create proposal",
-      url: "view-book",
-      content: "AllBook",
+      url: "/book/create-proposal",
+      bgcolor: "#6A2A4B",
+      color: "#ffffff"
     },
     {
-      id: '4',
+      id: "4",
       tabTitle: "Picking in",
-      url: "view-book",
-      content: "AllBook",
+      url: "/book/picking-in",
+      bgcolor: "#6A2A4B",
+      color: "#ffffff"
     },
     {
-      id: '5',
+      id: "5",
       tabTitle: "Picking out",
-      url: "view-book",
-      content: "AllBook",
+      url: "/book/picking-out",
+      bgcolor: "#6A2A4B",
+      color: "#ffffff"
     },
   ];
+  const handleTabClick = (tab) => {
+    setCurrentTab(tab.id);
+    navigate(tab.url);
+  };
   return (
     <div className="body container">
       <div className="tab-inline">
-        <div className="tab-item" onClick={() => handleViewBookClick()}>
-          View book
-        </div>
-        <div className="tab-item" onClick={() => handleCreateBookClick()}>
-          Create book
-        </div>
-        <div className="tab-item" onClick={() => handleProposalClick()}>
-          Create proposal
-        </div>
-        <div className="tab-item" onClick={() => handlePickingOutClick()}>
-          Picking out
-        </div>
-        <div className="tab-item" onClick={() => handlePickingInClick()}>
-          Picking in
-        </div>
-        {/* {tabs.map((tab, i) => (
+        {tabs.map((tab, i) => (
           <div
+            key={i}
             className="tab-item"
-            key={tab.id}
-            id={tab.id}
-            disabled={currentTab === `${tab.id}`}
+            style={{
+              backgroundColor: currentTab === tab.id ? tab.bgcolor : undefined,
+              color: currentTab === tab.id ? tab.color : undefined,
+              
+            }}
             onClick={() => handleTabClick(tab)}
           >
             {tab.tabTitle}
           </div>
         ))}
       </div>
-      <div className="content">
-        {tabs.map((tab, i) => (
-          <div key={i}>
-            {currentTab === `${tab.id}` && (
-              <div>
-               bbbb
-              </div>
-            )}
-          </div>
-        ))} */}
+      <div className="tab-content">
+        <Outlet />
       </div>
     </div>
   );

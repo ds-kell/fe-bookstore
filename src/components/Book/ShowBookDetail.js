@@ -39,12 +39,12 @@ const ShowBookDetail = ({ bookDetail }) => {
           </div>
         </div>
         <div className="col-md-4">
-          <Button
+          {/* <Button
             className="btn-bookdetail"
             onClick={() => handleEditClick(bookDetail.bookDto.id)}
           >
             Edit book
-          </Button>
+          </Button> */}
           <Button
             className="btn-bookdetail"
             onClick={() => handleProposalClick(bookDetail.id)}

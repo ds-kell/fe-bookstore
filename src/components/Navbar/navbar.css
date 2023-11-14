@@ -21,23 +21,16 @@
   font-size: 24px;
   color: wheat;
 }
-.nav-item:hover {
-  color: #fff;
-}
-.nav-item:hover{
-  color: white;
-}
 .nav-item:active, .nav-item:hover {
-  background-color: #C4ADFA;
   color: #fff;
   padding: 0 5px 0 5px;
-  border: 2px solid rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 10px;
 }
 .shop-name {
   font-weight: bold;
   font-size: 28px;
-  color: #ff6600;
+  color: #ccc;
 }
 
 .nav-search {
@@ -57,10 +50,10 @@
 }
 
 .btn-primary {
-  background-color: #6A2A4B;
+  background-color: #999999;
   color: #fff;
   border: none;
-  padding: 5px 15px 5px 15px;
+  padding: 7px 15px 7px 15px;
   border-radius: 5px;
   cursor: pointer;
   margin-left: 10px;

@@ -95,11 +95,7 @@ const ShowStaff = ({ listStaffs }) => {
                 >
                   <td>{staff.username || ""}</td>
                   <td>{staff.email || ""}</td>
-                  <td>
-                    {staff.authorityDtos
-                      ? staff.authorityDtos.map((role) => role.role).join(", ")
-                      : ""}
-                  </td>
+                  <td>{staff.authorities ? staff.authorities : ""}</td>
                   <td>{staff.branch ? staff.branch.name || "" : ""}</td>
                   <td>{staff.fullName || ""}</td>
                   <td>{staff.address || ""}</td>

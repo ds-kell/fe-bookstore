@@ -15,7 +15,7 @@ function GetBranch() {
         };
 
         try {
-          const response = await axios.get('http://localhost:8088/api/private/branch/all-branch', config);
+          const response = await axios.get('http://localhost:8088/api/public/branch/all-branch', config);
         setListBranches(response.data.data);
         } catch (error) {
           console.error("Error fetching data:", error);

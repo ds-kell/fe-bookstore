@@ -5,7 +5,6 @@ class CreateProposal extends React.Component {
   render() {
     return (
       <div className='body'>
-        <TabMenuBook/>
       </div>
     )
   }

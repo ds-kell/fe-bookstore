@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BiDownArrow } from "react-icons/bi";
 import "./booktable.css";
+import { Checkbox } from "../../pages/Checkbox";
 
 const BookTable = ({ data }) => {
   const [expandedRows, setExpandedRows] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  const [categoryFilters, setCategoryFilters] = useState([]);
-  const [filteredBySearch, setBranchFilters] = useState([]);
   const [filteredData, setFilteredData] = useState(data);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFilteredData(
       data.filter(
-        item =>
+        (item) =>
           item.bookDto.name.toLowerCase().includes(searchKeyword.toLowerCase())
-          // || item.bookDto.categoryDto.name.toLowerCase().includes(searchKeyword.toLowerCase())
+        // || item.bookDto.categoryDto.name.toLowerCase().includes(searchKeyword.toLowerCase())
       )
     );
   }, [searchKeyword, data]);
@@ -29,13 +31,38 @@ const BookTable = ({ data }) => {
     }
   };
 
+  const handleNestedRowClick = (bookDetailId) => {
+    navigate(`/book/detail/${bookDetailId}`);
+  };
+  const handleRowClick = (bookId) => {
+    navigate(`${bookId}`);
+  };
+  //
 
+  const [selected, setSelected] = useState([]);
+
+  function handleSelect(value, name, id) {
+    if (value) {
+      setSelected([...selected, id]);
+    } else {
+      setSelected(selected.filter((item) => item !== id));
+    }
+  }
+
+  function selectAll(value) {
+    if (value) {
+      setSelected(filteredData.map((item) => item.bookDto.id));
+    } else {
+      setSelected([]);
+    }
+  }
+
+  function handleSubmit() {
+    console.log(selected);
+  }
   return (
     <div className="container">
       <div className="row">
-        {/* <div className="col-sm-4 col-md-2 col-lg-2">
-         
-        </div> */}
         <div className=" col-sm-8 col-md-10 col-lg-10">
           <div>
             <input
@@ -50,7 +77,17 @@ const BookTable = ({ data }) => {
             <table>
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>
+                    {/* <Checkbox
+                      id=""
+                      name="all"
+                      value={selected.length === filteredData.length}
+                      updateValue={selectAll}
+                    >
+                      All
+                    </Checkbox> */}
+                  </th>
+                  <th>No</th>
                   <th>Name</th>
                   <th>Import Price</th>
                   <th>Export Price</th>
@@ -62,11 +99,30 @@ const BookTable = ({ data }) => {
                 {filteredData.map((item, index) => (
                   <React.Fragment key={item.bookDto.id}>
                     <tr>
-                      <td>{index + 1}</td>
-                      <td>{item.bookDto.name}</td>
-                      <td>{item.bookDto.importPrice}</td>
-                      <td>{item.bookDto.exportPrice}</td>
-                      <td>{item.bookDto.categoryDto.name}</td>
+                      <td>
+                        {/* <Checkbox
+                          id={item.bookDto.id}
+                          key={item.bookDto.id}
+                          name={item.bookDto.name}
+                          value={selected.includes(item.bookDto.id)}
+                          updateValue={handleSelect}
+                        ></Checkbox> */}
+                      </td>
+                      <td onClick={() => handleRowClick(item.bookDto.id)}>
+                        {index + 1}
+                      </td>
+                      <td onClick={() => handleRowClick(item.bookDto.id)}>
+                        {item.bookDto.name}
+                      </td>
+                      <td onClick={() => handleRowClick(item.bookDto.id)}>
+                        {item.bookDto.importPrice}
+                      </td>
+                      <td onClick={() => handleRowClick(item.bookDto.id)}>
+                        {item.bookDto.exportPrice}
+                      </td>
+                      <td onClick={() => handleRowClick(item.bookDto.id)}>
+                        {item.bookDto.categoryDto.name}
+                      </td>
                       <td>
                         <span onClick={(e) => e.stopPropagation()}>
                           <BiDownArrow
@@ -83,7 +139,7 @@ const BookTable = ({ data }) => {
                     </tr>
                     {expandedRows.includes(item.bookDto.id) && (
                       <tr>
-                        <td colSpan="1"></td>
+                        <td colSpan="2"></td>
                         <td colSpan="4">
                           <table>
                             <thead>
@@ -96,7 +152,12 @@ const BookTable = ({ data }) => {
                             </thead>
                             <tbody>
                               {item.bookDetailDtos.map((detail, index) => (
-                                <tr key={detail.id}>
+                                <tr
+                                  key={detail.id}
+                                  onClick={() =>
+                                    handleNestedRowClick(detail.id)
+                                  }
+                                >
                                   <td>{index + 1}</td>
                                   <td>{detail.branchDto.name}</td>
                                   <td>{detail.branchDto.address}</td>
@@ -114,6 +175,7 @@ const BookTable = ({ data }) => {
               </tbody>
             </table>
           </div>
+          {/* <button onClick={handleSubmit}>Submit</button> */}
         </div>
       </div>
     </div>
