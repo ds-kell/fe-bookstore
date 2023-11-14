@@ -30,7 +30,7 @@ tr:nth-child(odd) {
 }
 .table-row:hover {
   background-color: #ccc;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 /* page number  */
@@ -57,16 +57,15 @@ tr:nth-child(odd) {
 }
 
 .page-button:hover {
-  background-color: #6A2A4B;
+  background-color: #6a2a4b;
   color: #fff;
 }
 
 .page-button.active {
-  background-color: #6A2A4B;
+  background-color: #6a2a4b;
   color: #fff;
   font-weight: bold;
 }
-
 
 .checkbox-label {
   display: block;
@@ -81,11 +80,28 @@ tr:nth-child(odd) {
   width: 15px;
   height: 15px;
 }
-.filter-title{
+.filter-title {
   display: flex;
 }
-.filter-icon{
+.filter-icon {
   margin-top: 4px;
   margin-right: 5px;
   font-size: 18px;
+}
+
+.create-book-block {
+  display: flex;
+  margin: 10px 0 10px 0;
+}
+.create-book-block input{
+  width: 100%;
+  padding: 5px;
+  height: 40px;
+  margin: 0 10px 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.btn-create-book{
+  text-align: center;
 }

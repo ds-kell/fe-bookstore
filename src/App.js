@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ReactDOM from "react-dom";
 import Navbar from "./components/Navbar/Navbar";
 
 import Home from "./pages/Home";
@@ -17,9 +16,9 @@ import PagePostPickingOut from "./pages/PagePostPickingOut";
 import PagePostPickingIn from "./pages/PagePostPickingIn";
 import PagePostProposal from "./pages/PagePostProposal";
 import AllBook from "./pages/AllBook";
-import CreateBook from "./pages/CreateBook";
 import CreateProposal from "./pages/CreateProposal";
 import BookLayout from "./pages/BookLayout";
+import PagePostBook from "./pages/PagePostBook";
 
 function App() {
   const { setToken, tokenStorage, token } = useToken();
@@ -42,7 +41,7 @@ function App() {
 
         <Route path="/book/*" element={<BookLayout />}>
           <Route path="view-book" element={<AllBook />} />
-          <Route path="create-book" element={<CreateBook />} />
+          <Route path="create-book" element={<PagePostBook />} />
           <Route path="create-proposal" element={<CreateProposal />} />
         </Route>
 
