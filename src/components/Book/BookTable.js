@@ -61,24 +61,22 @@ const BookTable = ({ data }) => {
     console.log(selected);
   }
   return (
-    <div className="container">
-      <div className="row">
-        <div className=" col-sm-8 col-md-10 col-lg-10">
-          <div>
-            <input
-              type="text"
-              id="search"
-              placeholder="Search by book name"
-              value={searchKeyword}
-              onChange={(e) => setSearchKeyword(e.target.value)}
-            />
-          </div>
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    {/* <Checkbox
+    <div className="">
+      <div>
+        <input
+          type="text"
+          id="search"
+          placeholder="Search by book name"
+          value={searchKeyword}
+          onChange={(e) => setSearchKeyword(e.target.value)}
+        />
+      </div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {/* <Checkbox
                       id=""
                       name="all"
                       value={selected.length === filteredData.length}
@@ -86,98 +84,96 @@ const BookTable = ({ data }) => {
                     >
                       All
                     </Checkbox> */}
-                  </th>
-                  <th>No</th>
-                  <th>Name</th>
-                  <th>Import Price</th>
-                  <th>Export Price</th>
-                  <th>Category</th>
-                  <th>#</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredData.map((item, index) => (
-                  <React.Fragment key={item.bookDto.id}>
-                    <tr>
-                      <td>
-                        {/* <Checkbox
+              </th>
+              <th>No</th>
+              <th>Name</th>
+              <th>Import Price</th>
+              <th>Export Price</th>
+              <th>Category</th>
+              <th>#</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.map((item, index) => (
+              <React.Fragment key={item.bookDto.id}>
+                <tr>
+                  <td>
+                    {/* <Checkbox
                           id={item.bookDto.id}
                           key={item.bookDto.id}
                           name={item.bookDto.name}
                           value={selected.includes(item.bookDto.id)}
                           updateValue={handleSelect}
                         ></Checkbox> */}
-                      </td>
-                      <td onClick={() => handleRowClick(item.bookDto.id)}>
-                        {index + 1}
-                      </td>
-                      <td onClick={() => handleRowClick(item.bookDto.id)}>
-                        {item.bookDto.name}
-                      </td>
-                      <td onClick={() => handleRowClick(item.bookDto.id)}>
-                        {item.bookDto.importPrice}
-                      </td>
-                      <td onClick={() => handleRowClick(item.bookDto.id)}>
-                        {item.bookDto.exportPrice}
-                      </td>
-                      <td onClick={() => handleRowClick(item.bookDto.id)}>
-                        {item.bookDto.categoryDto.name}
-                      </td>
-                      <td>
-                        <span onClick={(e) => e.stopPropagation()}>
-                          <BiDownArrow
-                            className="arrow-icon"
-                            onClick={() => handleExpandeClick(item.bookDto.id)}
-                            style={{
-                              transform: expandedRows.includes(item.bookDto.id)
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
-                            }}
-                          />
-                        </span>
-                      </td>
-                    </tr>
-                    {expandedRows.includes(item.bookDto.id) && (
-                      <tr>
-                        <td colSpan="2"></td>
-                        <td colSpan="4">
-                          <table>
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Branch</th>
-                                <th>Address</th>
-                                <th>Quantity</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {item.bookDetailDtos.map((detail, index) => (
-                                <tr
-                                  key={detail.id}
-                                  onClick={() =>
-                                    handleNestedRowClick(detail.id)
-                                  }
-                                >
-                                  <td>{index + 1}</td>
-                                  <td>{detail.branchDto.name}</td>
-                                  <td>{detail.branchDto.address}</td>
-                                  <td>{detail.quantity}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </td>
-                        <td colSpan="1"></td>
-                      </tr>
-                    )}
-                  </React.Fragment>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {/* <button onClick={handleSubmit}>Submit</button> */}
-        </div>
+                  </td>
+                  <td onClick={() => handleRowClick(item.bookDto.id)}>
+                    {index + 1}
+                  </td>
+                  <td onClick={() => handleRowClick(item.bookDto.id)}>
+                    {item.bookDto.name}
+                  </td>
+                  <td onClick={() => handleRowClick(item.bookDto.id)}>
+                    {item.bookDto.importPrice}
+                  </td>
+                  <td onClick={() => handleRowClick(item.bookDto.id)}>
+                    {item.bookDto.exportPrice}
+                  </td>
+                  <td onClick={() => handleRowClick(item.bookDto.id)}>
+                    {item.bookDto.categoryDto.name}
+                  </td>
+                  <td>
+                    <span onClick={(e) => e.stopPropagation()}>
+                      <BiDownArrow
+                        className="arrow-icon"
+                        onClick={() => handleExpandeClick(item.bookDto.id)}
+                        style={{
+                          transform: expandedRows.includes(item.bookDto.id)
+                            ? "rotate(180deg)"
+                            : "rotate(0deg)",
+                        }}
+                      />
+                    </span>
+                  </td>
+                </tr>
+                {expandedRows.includes(item.bookDto.id) && (
+                  <tr>
+                    <td colSpan="2"></td>
+                    <td colSpan="4">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Branch</th>
+                            <th>Address</th>
+                            <th>Quantity</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {item.bookDetailDtos.map((detail, index) => (
+                            <tr
+                              key={detail.id}
+                              onClick={() =>
+                                handleNestedRowClick(detail.id)
+                              }
+                            >
+                              <td>{index + 1}</td>
+                              <td>{detail.branchDto.name}</td>
+                              <td>{detail.branchDto.address}</td>
+                              <td>{detail.quantity}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </td>
+                    <td colSpan="1"></td>
+                  </tr>
+                )}
+              </React.Fragment>
+            ))}
+          </tbody>
+        </table>
       </div>
+      {/* <button onClick={handleSubmit}>Submit</button> */}
     </div>
   );
 };
