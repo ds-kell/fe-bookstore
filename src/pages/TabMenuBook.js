@@ -41,6 +41,13 @@ function TabMenuBook() {
       bgcolor: "#6A2A4B",
       color: "#ffffff"
     },
+    {
+      id: "6",
+      tabTitle: "Category",
+      url: "/book/category",
+      bgcolor: "#6A2A4B",
+      color: "#ffffff"
+    },
   ];
   const handleTabClick = (tab) => {
     setCurrentTab(tab.id);
