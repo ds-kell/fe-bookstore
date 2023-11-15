@@ -94,7 +94,6 @@ tr:nth-child(odd) {
   margin: 10px 0 10px 0;
 }
 .create-book-block input{
-  width: 100%;
   padding: 5px;
   height: 40px;
   margin: 0 10px 0 10px;

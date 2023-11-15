@@ -5,7 +5,7 @@ import Select from "react-select";
 
 import "./category.css";
 
-function DropdownCategory(props) {
+function SelectCategory({onSelectCategory}) {
   const [listCategories, setListCategories] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -22,7 +22,6 @@ function DropdownCategory(props) {
             config
           );
           setListCategories(response.data.data);
-          console.log(listCategories)
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -33,29 +32,27 @@ function DropdownCategory(props) {
     fetchData();
   }, []);
 
-  const [categorySelectedId, setCategorySelectedId] = useState("");
+  const [categorySelected, setCategorySelected] = useState();
 
-  const handleCategoryChange = (event) => {
-    const categoryId = event.target.value;
-    setCategorySelectedId(categoryId);
-    props.onCategoryChange(categoryId);
-  };
+  const categoryOptions = listCategories.map(category => ({
+    value: category.id,
+    label: category.name
+  }));
+
+  useEffect(() => {
+    onSelectCategory(categorySelected);
+  }, [categorySelected, onSelectCategory]);
+
   return (
     <div>
-      <select value={categorySelectedId} onChange={handleCategoryChange}>
-        {listCategories.map((item) => (
-          <option key={item.id} value={item.id}>
-            {item.name}
-          </option>
-        ))}
-      </select>
       <Select
-        defaultValue={categorySelectedId}
-        onChange={setCategorySelectedId}
-        options={listCategories}
-      />
+      value={categoryOptions.find((option) => option.value === categorySelected)}
+      onChange={(selectedOption) => setCategorySelected(selectedOption?.value)}
+      isMulti
+      options={categoryOptions}
+    />
     </div>
   );
 }
 
-export default DropdownCategory;
+export default SelectCategory;

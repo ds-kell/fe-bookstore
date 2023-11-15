@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./book.css";
 import { Button } from "antd";
-import DropdownCategory from "../Category/DropdownCategory";
+import SelectCategory from "../Category/SelectCategory";
 
-import Select from "react-select";
-import { colourOptions } from "./test.ts";
-
-function PostPickingIn() {
+function PostBook() {
   const accessToken = localStorage.getItem("token");
   let config = {};
   const [bookRequests, setBookRequests] = useState([
@@ -18,22 +15,14 @@ function PostPickingIn() {
       categoryId: 0,
     },
   ]);
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleChange = (index, field, value) => {
     const updatedRequests = [...bookRequests];
     updatedRequests[index][field] = value;
     setBookRequests(updatedRequests);
   };
-
-  const handleCategoryChange = (index, categoryId) => {
-    const updatedRequests = [...bookRequests];
-    updatedRequests[index].categoryId = categoryId;
-    setBookRequests(updatedRequests);
-  };
-
   const handleSubmit = async () => {
-    console.log(selectedOption);
+    console.log(selectedCategory);
   };
 
   const handleAddBookRequest = () => {
@@ -42,13 +31,11 @@ function PostPickingIn() {
       { name: "", importPrice: 0, exportPrice: 0, categoryId: 0 },
     ]);
   };
+  const [selectedCategory, setSelectedCategory] = useState();
 
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+  };
   return (
     <div className="">
       <div className="row">
@@ -78,11 +65,7 @@ function PostPickingIn() {
                 }
               />
               <div className="select-category">
-                <DropdownCategory
-                  onCategoryChange={(categoryId) =>
-                    handleCategoryChange(index, categoryId)
-                  }
-                />
+                <SelectCategory onSelectCategory={handleCategorySelect} />
               </div>
             </div>
           ))}
@@ -95,15 +78,10 @@ function PostPickingIn() {
             Submit
           </Button>
         </div>
-        <Select
-          defaultValue={selectedOption}
-          isMulti
-          onChange={setSelectedOption}
-          options={options}
-        />
+        <p>Selected Category ID: {selectedCategory}</p>
       </div>
     </div>
   );
 }
 
-export default PostPickingIn;
+export default PostBook;
