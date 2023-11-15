@@ -1,15 +1,23 @@
-import React from 'react';
+import React from "react";
 
-import { GetBranch } from '../components/Branch/GetBranch';
-import './style.css'
+import { GetBranch } from "../components/Branch/GetBranch";
+import PostBranch from "../components/Branch/PostBranch";
+import "./style.css";
 
 class Branch extends React.Component {
   render() {
     return (
-      <div className='body'>
-        <GetBranch />
+      <div className="container body">
+        <div className="row">
+          <div className="col-md-8">
+            <GetBranch />
+          </div>
+          <div className="col-md-4">
+            <PostBranch />
+          </div>
+        </div>
       </div>
-    )
+    );
   }
 }
 

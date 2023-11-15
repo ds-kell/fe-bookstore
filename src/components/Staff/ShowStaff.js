@@ -1,7 +1,7 @@
 import "./staff.css";
 import { Button } from "antd";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MdOutlineFactory } from "react-icons/md";
 
 const ShowStaff = ({ listStaffs }) => {

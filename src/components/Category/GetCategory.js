@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react'
+import ShowCategory from './ShowCategory';
 
 
 function GetCategory() {
@@ -29,9 +30,9 @@ function GetCategory() {
 
     return (
     <div>
-            {/* <ShowCategory listCategories={listCategories} /> */}
+            <ShowCategory data={listCategories} />
     </div>
     )
 }
 
-export { GetCategory };
+export default GetCategory;

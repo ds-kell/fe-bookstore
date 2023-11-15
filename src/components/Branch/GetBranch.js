@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react'
+import ShowBranch from './ShowBranch';
 
 
 function GetBranch() {
@@ -16,7 +17,8 @@ function GetBranch() {
 
         try {
           const response = await axios.get('http://localhost:8088/api/public/branch/all-branch', config);
-        setListBranches(response.data.data);
+          console.log(response.data)
+        setListBranches(response.data);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -29,7 +31,7 @@ function GetBranch() {
 
   return (
     <div>
-      {/* <ShowBranch listBranches={listBranches} /> */}
+      {listBranches ? <ShowBranch data={listBranches} /> : <p>Loading...</p>}
     </div>
   )
 }

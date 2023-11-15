@@ -19,6 +19,7 @@ import AllBook from "./pages/AllBook";
 import CreateProposal from "./pages/CreateProposal";
 import BookLayout from "./pages/BookLayout";
 import PagePostBook from "./pages/PagePostBook";
+import Category from "./pages/Category";
 
 function App() {
   const { setToken, tokenStorage, token } = useToken();
@@ -43,6 +44,7 @@ function App() {
           <Route path="view-book" element={<AllBook />} />
           <Route path="create-book" element={<PagePostBook />} />
           <Route path="create-proposal" element={<CreateProposal />} />
+          <Route path="category" element={<Category />} />
         </Route>
 
 
