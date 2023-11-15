@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "antd";
+import React from "react";
 import "./bookdetail.css";
-import { TbH2 } from "react-icons/tb";
 
 const ShowBookDetail = ({ listBooks }) => {
-  const navigate = useNavigate();
 
   return (
     <div className="">
@@ -13,7 +9,6 @@ const ShowBookDetail = ({ listBooks }) => {
         <div className="col-md-2"></div>
         <div className="col-md-8">
           <div>
-            <h2>Book List</h2>
             <table>
               <thead>
                 <tr>

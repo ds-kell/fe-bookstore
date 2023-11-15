@@ -27,7 +27,6 @@ function PostProposal() {
                             {
                                 idBook: loadedBookDetail.bookDto.id,
                                 quantity: 1,
-                                total: loadedBookDetail.bookDto.exportPrice,
                             },
                         ],
                     });
@@ -66,7 +65,8 @@ function PostProposal() {
                 headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
             };
             console.log(proposalRequest);
-            // const response = await axios.post("http://localhost:8088/api/private/proposal/create-proposal", proposalRequest, config);
+            const response = await axios.post("http://localhost:8088/api/private/proposal/create-proposal", proposalRequest, config);
+            console.log(response);
 
         } catch (error) {
             console.error("Error submitting form:", error);

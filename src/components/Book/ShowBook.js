@@ -113,23 +113,6 @@ const ShowBook = (props) => {
       <div className="col-md-3">
         <div className="sidebar">
           <div className="filter-group">
-            <div className="search-bar">
-              <input
-                type="text"
-                placeholder="Search by book name"
-                value={searchTerm}
-                onChange={handleSearchChange}
-              />
-              {searchTerm && (
-                <Button
-                  className="btn-antd"
-                  onClick={() => setSearchTerm("")}
-                >
-                  Clear
-                </Button>
-              )}
-            </div>
-
             <div className="filter-title">
               <TbCategory className="filter-icon" />
               <h5>Category</h5>
@@ -168,6 +151,20 @@ const ShowBook = (props) => {
         </div>
       </div>
       <div className="col-md-9">
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search by book name"
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          {searchTerm && (
+            <Button className="btn-clear" onClick={() => setSearchTerm("")}>
+              Clear
+            </Button>
+          )}
+        </div>
+
         <table>
           <thead>
             <tr>

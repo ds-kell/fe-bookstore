@@ -110,7 +110,6 @@ tr:nth-child(odd) {
 .search-bar{
   margin: 20px 0 10px 0;
 }
-.search-bar input{
-  border-radius: 5px;
-  padding: 0 5px 0 5px;
+.filter-group{
+  margin: 0 0 20px 0;
 }

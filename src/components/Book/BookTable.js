@@ -49,7 +49,7 @@ const BookTable = ({ data }) => {
           onChange={(e) => setSearchKeyword(e.target.value)}
         />
         {searchKeyword && (
-          <Button className="btn-antd" onClick={() => setSearchKeyword("")}>
+          <Button className="btn-clear" onClick={() => setSearchKeyword("")}>
             Clear
           </Button>
         )}

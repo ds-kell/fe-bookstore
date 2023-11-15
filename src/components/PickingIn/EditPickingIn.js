@@ -5,15 +5,12 @@ import axios from "axios";
 const accessToken = localStorage.getItem("token");
 let config = {};
 
-const EditPickingOut = ({ data }) => {
-  const [pickingOutRequest, setPickingOutRequest] = useState({
-    customerName: "",
-    customerPhone: "",
-    customerEmail: "",
+const EditPickingIn = ({ data }) => {
+  const [pickingInRequest, setPickingInRequest] = useState({
     total: 0,
     date: new Date().toISOString(),
     note: "",
-    pickingOutDetailRequests: Array.from({ length: data.length }, () => ({
+    pickingInDetailRequests: Array.from({ length: data.length }, () => ({
       idBook: 0,
       quantity: 1,
       total: 0,
@@ -21,12 +18,12 @@ const EditPickingOut = ({ data }) => {
   });
 
   useEffect(() => {
-    setPickingOutRequest((prevState) => ({
+    setPickingInRequest((prevState) => ({
       ...prevState,
-      pickingOutDetailRequests: data.map((item) => ({
-        idBook: item.bookDto.id,
+      pickingInDetailRequests: data.map((item) => ({
+        idBook: item.id,
         quantity: 1,
-        total: item.bookDto.exportPrice,
+        total: item.importPrice,
       })),
     }));
   }, [data]);
@@ -34,75 +31,54 @@ const EditPickingOut = ({ data }) => {
   const handleQuantityChange = (index, value) => {
     const intValue = parseInt(value, 10);
     if (!isNaN(intValue)) {
-      const updatedDetails = [...pickingOutRequest.pickingOutDetailRequests];
+      const updatedDetails = [...pickingInRequest.pickingInDetailRequests];
       updatedDetails[index].quantity = intValue;
 
-      setPickingOutRequest({
-        ...pickingOutRequest,
-        pickingOutDetailRequests: updatedDetails,
+      setPickingInRequest({
+        ...pickingInRequest,
+        pickingInDetailRequests: updatedDetails,
       });
     }
   };
 
-  const handleCustomerNameChange = (event) => {
-    setPickingOutRequest({
-      ...pickingOutRequest,
-      customerName: event.target.value,
-    });
-  };
-
-  const handleCustomerPhoneChange = (event) => {
-    setPickingOutRequest({
-      ...pickingOutRequest,
-      customerPhone: event.target.value,
-    });
-  };
-
-  const handleCustomerEmailChange = (event) => {
-    setPickingOutRequest({
-      ...pickingOutRequest,
-      customerEmail: event.target.value,
-    });
-  };
-
   const handleNoteChange = (event) => {
-    setPickingOutRequest({
-      ...pickingOutRequest,
+    setPickingInRequest({
+      ...pickingInRequest,
       note: event.target.value,
     });
   };
 
-  const totalAmount = pickingOutRequest.pickingOutDetailRequests.reduce(
+  const totalAmount = pickingInRequest.pickingInDetailRequests.reduce(
     (total, detail) => total + detail.quantity * detail.total,
     0
   );
 
   const handleSubmit = async () => {
-    const updatedDetailRequests =
-      pickingOutRequest.pickingOutDetailRequests.map((detail) => ({
+    const updatedDetailRequests = pickingInRequest.pickingInDetailRequests.map(
+      (detail) => ({
         ...detail,
         total: detail.quantity * detail.total,
-      }));
+      })
+    );
 
-    const updatedPickingOutRequest = {
-      ...pickingOutRequest,
-      pickingOutDetailRequests: updatedDetailRequests,
+    const updatedPickingInRequest = {
+      ...pickingInRequest,
+      pickingInDetailRequests: updatedDetailRequests,
     };
 
-    updatedPickingOutRequest.total =
-      pickingOutRequest.pickingOutDetailRequests.reduce(
+    updatedPickingInRequest.total =
+      pickingInRequest.pickingInDetailRequests.reduce(
         (total, detail) => total + detail.quantity * detail.total,
         0
       );
-
     try {
       config = {
         method: "POST",
         headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
       };
       const response = await axios.post(
-        "http://localhost:8088/api/private/picking-out/create-picking-out",
-        updatedPickingOutRequest,
+        "http://localhost:8088/api/private/picking-in/create-picking-in",
+        updatedPickingInRequest,
         config
       );
       console.log("response", response.data);
@@ -130,8 +106,8 @@ const EditPickingOut = ({ data }) => {
               {data.map((item, index) => (
                 <tr key={item.id}>
                   <td>{index + 1}</td>
-                  <td>{item.bookDto.name}</td>
-                  <td>{item.bookDto.exportPrice}</td>
+                  <td>{item.name}</td>
+                  <td>{item.importPrice}</td>
                   <td>
                     <input
                       type="number"
@@ -140,7 +116,7 @@ const EditPickingOut = ({ data }) => {
                       defaultValue={1}
                       min={1}
                       value={
-                        pickingOutRequest.pickingOutDetailRequests[index]
+                        pickingInRequest.pickingInDetailRequests[index]
                           ?.quantity || ""
                       }
                       onChange={(e) =>
@@ -153,8 +129,8 @@ const EditPickingOut = ({ data }) => {
                     />
                   </td>
                   <td>
-                    {pickingOutRequest.pickingOutDetailRequests[index]?.total *
-                      pickingOutRequest.pickingOutDetailRequests[index]
+                    {pickingInRequest.pickingInDetailRequests[index]?.total *
+                      pickingInRequest.pickingInDetailRequests[index]
                         ?.quantity || ""}
                   </td>
                 </tr>
@@ -164,27 +140,9 @@ const EditPickingOut = ({ data }) => {
         </div>
         <div className="col-md-3">
           <div className="customer-block">
-            <input
-              type="text"
-              placeholder="Customer Name"
-              value={pickingOutRequest.customerName}
-              onChange={handleCustomerNameChange}
-            />
-            <input
-              type="tel"
-              placeholder="Customer Phone"
-              value={pickingOutRequest.customerPhone}
-              onChange={handleCustomerPhoneChange}
-            />
-            <input
-              type="email"
-              placeholder="Customer Email"
-              value={pickingOutRequest.customerEmail}
-              onChange={handleCustomerEmailChange}
-            />
             <textarea
               placeholder="Note"
-              value={pickingOutRequest.note}
+              value={pickingInRequest.note}
               onChange={handleNoteChange}
             />
           </div>
@@ -201,4 +159,4 @@ const EditPickingOut = ({ data }) => {
     </div>
   );
 };
-export default EditPickingOut;
+export default EditPickingIn;
