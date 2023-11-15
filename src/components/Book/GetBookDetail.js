@@ -29,7 +29,7 @@ function GetBookDetail() {
   }, [bookDetailId]);
 
   return (
-    <div className='container'>
+    <div className=''>
       <div className=''>
         {bookDetail ? <ShowBookDetail bookDetail={bookDetail} /> : <p>Loading...</p>}
       </div>

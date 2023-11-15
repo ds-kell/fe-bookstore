@@ -20,7 +20,7 @@ const ShowStaffInfo = ({ staff }) => {
   };
 
   return (
-    <div className="container">
+    <div className="">
       <div className="staff-container">
         <div className="row">
           <div className="col-sm-3 col-md-3 col-lg-3"></div>

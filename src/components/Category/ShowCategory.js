@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const ShowCategory = ({ data }) => {
   return (
@@ -6,15 +6,15 @@ const ShowCategory = ({ data }) => {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>No</th>
             <th>Name</th>
             <th>Description</th>
           </tr>
         </thead>
         <tbody>
-          {data.map(item => (
+          {data.map((item, index) => (
             <tr key={item.id}>
-              <td>{item.id}</td>
+              <td>{index + 1}</td>
               <td>{item.name}</td>
               <td>{item.description}</td>
             </tr>
@@ -24,5 +24,4 @@ const ShowCategory = ({ data }) => {
     </div>
   );
 };
-
 export default ShowCategory;

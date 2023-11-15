@@ -50,7 +50,7 @@ function PostPickingIn() {
   ];
 
   return (
-    <div className="container">
+    <div className="">
       <div className="row">
         <div>
           {bookRequests.map((request, index) => (

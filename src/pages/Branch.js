@@ -7,7 +7,7 @@ import "./style.css";
 class Branch extends React.Component {
   render() {
     return (
-      <div className="container body">
+      <div className="body">
         <div className="row">
           <div className="col-md-8">
             <GetBranch />

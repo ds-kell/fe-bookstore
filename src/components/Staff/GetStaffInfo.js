@@ -29,7 +29,7 @@ function GetStaffInfo() {
   }, [userId]);
 
   return (
-    <div className='container'>
+    <div className=''>
       <div className=''>
         {staffInfo ? <ShowStaffInfo staff={staffInfo} /> : <p>Loading...</p>}
       </div>

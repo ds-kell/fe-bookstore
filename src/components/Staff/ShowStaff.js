@@ -49,7 +49,7 @@ const ShowStaff = ({ listStaffs }) => {
     setSelectedBranches(updatedBranches);
   };
   return (
-    <div className="container">
+    <div className="">
       <div className="row">
         <div className="col-md-2 filter">
           <div className="sidebar">

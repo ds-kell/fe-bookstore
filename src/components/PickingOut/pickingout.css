@@ -34,3 +34,23 @@ textarea {
 .btn-picking-out {
     text-align: center;
 }
+.btn-col{
+    margin-top: 12px;
+}
+.customer-block{
+    display: block;
+    margin: 20px 0 0 20px;
+}
+.customer-block input{
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    margin: 10px 0 10px 0;
+    padding: 5px 10px 5px 10px;
+}
+.edit-picking-out{
+    text-align: center;
+}
+.input-number{
+    width: 50%;
+}

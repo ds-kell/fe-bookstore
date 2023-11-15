@@ -54,10 +54,9 @@ function TabMenuBook() {
     navigate(tab.url);
   };
   return (
-    <div className="container">
+    <div className="">
       <div className="row">
-        <div className="col-md-1"></div>
-        <div className="col-md-10">
+        <div className="">
           <div className="tab-inline">
             {tabs.map((tab, i) => (
               <div

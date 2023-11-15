@@ -30,7 +30,7 @@ const ShowProfile = ({ profile }) => {
   }
 
   return (
-    <div className="container">
+    <div className="">
       <div className="profile-container">
         <div className="user-profile">
           <h1>User Profile</h1>

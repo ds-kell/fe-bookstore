@@ -20,6 +20,7 @@ import CreateProposal from "./pages/CreateProposal";
 import BookLayout from "./pages/BookLayout";
 import PagePostBook from "./pages/PagePostBook";
 import Category from "./pages/Category";
+import PageMultiPostPickingOut from "./pages/PageMultiPostPickingOut";
 
 function App() {
   const { setToken, tokenStorage, token } = useToken();
@@ -45,6 +46,7 @@ function App() {
           <Route path="create-book" element={<PagePostBook />} />
           <Route path="create-proposal" element={<CreateProposal />} />
           <Route path="category" element={<Category />} />
+          <Route path="picking-out" element={<PageMultiPostPickingOut />} />
         </Route>
 
 

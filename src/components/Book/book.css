@@ -105,3 +105,12 @@ tr:nth-child(odd) {
 .btn-create-book{
   text-align: center;
 }
+
+/*  */
+.search-bar{
+  margin: 20px 0 10px 0;
+}
+.search-bar input{
+  border-radius: 5px;
+  padding: 0 5px 0 5px;
+}

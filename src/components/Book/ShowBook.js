@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TbCategory } from "react-icons/tb";
 import { MdOutlineFactory } from "react-icons/md";
 import "./book.css";
+import { Checkbox } from "../../pages/Checkbox";
 import { Button } from "antd";
 
-const ShowBook = ({ listBooks }) => {
+const ShowBook = (props) => {
+  const listBooks = props.listBooks;
   // page
-  const itemsPerPage = 20;
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  // const currentBooks = listBooks.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -32,18 +33,17 @@ const ShowBook = ({ listBooks }) => {
   const filteredByCategory =
     selectedCategories.length > 0
       ? listBooks.filter((book) =>
-        selectedCategories.includes(book.bookDto.categoryDto.name)
-      )
+          selectedCategories.includes(book.bookDto.categoryDto.name)
+        )
       : listBooks;
 
   const filteredByBranch =
     selectedBranches.length > 0
       ? filteredByCategory.filter((book) =>
-        selectedBranches.includes(book.branchDto.name)
-      )
+          selectedBranches.includes(book.branchDto.name)
+        )
       : filteredByCategory;
 
-  const currentBooks = filteredByBranch.slice(startIndex, endIndex);
   const totalPages = Math.ceil(filteredByBranch.length / itemsPerPage);
 
   const handleCategoryChange = (category) => {
@@ -66,7 +66,7 @@ const ShowBook = ({ listBooks }) => {
     setSelectedBranches(updatedBranches);
   };
 
-  // 
+  // search
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -76,107 +76,164 @@ const ShowBook = ({ listBooks }) => {
 
   const filteredBySearch = searchTerm
     ? filteredByBranch.filter((bookDetail) =>
-      bookDetail.bookDto.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+        bookDetail.bookDto.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
     : filteredByBranch;
+  // select
+
+  const [selected, setSelected] = useState([]);
+  function handleSelect(value, name, id) {
+    if (value) {
+      setSelected([...selected, id]);
+    } else {
+      setSelected(selected.filter((item) => item !== id));
+    }
+  }
+
+  function selectAll(value) {
+    if (value) {
+      setSelected(filteredBySearch.map((item) => item));
+    } else {
+      setSelected([]);
+    }
+  }
+
+  const { setListBookPickingOut } = props;
+  useEffect(() => {
+    setListBookPickingOut(selected);
+  }, [selected]);
+  //
+  function handleSubmit() {
+    console.log(selected);
+  }
+  const currentBooks = filteredBySearch.slice(startIndex, endIndex);
 
   return (
-    <div className="container">
-      <div className=" row book-block">
-        <div className="col-sm-4 col-md-2 col-lg-2">
-          <div className="sidebar">
-            <div className="filter-group">
-              <div className="filter-title">
-                <TbCategory className="filter-icon" />
-                <h5>Category</h5>
-              </div>
-              <div className="filter-item">
-                {categories.map((category) => (
-                  <label key={category} className="checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={selectedCategories.includes(category)}
-                      onChange={() => handleCategoryChange(category)}
-                    />
-                    {category}
-                  </label>
-                ))}
-              </div>
+    <div className="row">
+      <div className="col-md-3">
+        <div className="sidebar">
+          <div className="filter-group">
+            <div className="search-bar">
+              <input
+                type="text"
+                placeholder="Search by book name"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              {searchTerm && (
+                <Button
+                  className="btn-antd"
+                  onClick={() => setSearchTerm("")}
+                >
+                  Clear
+                </Button>
+              )}
             </div>
-            <div className="filter-group">
-              <div className="filter-title">
-                <MdOutlineFactory className="filter-icon" />
-                <h5>Branch</h5>
-              </div>
-              <div className="filter-item">
-                {branches.map((branch) => (
-                  <label key={branch} className="checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={selectedBranches.includes(branch)}
-                      onChange={() => handleBranchChange(branch)}
-                    />
-                    {branch}
-                  </label>
-                ))}
-              </div>
+
+            <div className="filter-title">
+              <TbCategory className="filter-icon" />
+              <h5>Category</h5>
+            </div>
+            <div className="filter-item">
+              {categories.map((category) => (
+                <label key={category.id} className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories.includes(category)}
+                    onChange={() => handleCategoryChange(category)}
+                  />
+                  {category}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div className="filter-group">
+            <div className="filter-title">
+              <MdOutlineFactory className="filter-icon" />
+              <h5>Branch</h5>
+            </div>
+            <div className="filter-item">
+              {branches.map((branch) => (
+                <label key={branch.id} className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={selectedBranches.includes(branch)}
+                    onChange={() => handleBranchChange(branch)}
+                  />
+                  {branch}
+                </label>
+              ))}
             </div>
           </div>
         </div>
-        <div className=" col-sm-8 col-md-8 col-lg-8">
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search by book name"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Book Name</th>
-                <th>Import Price</th>
-                <th>Export Price</th>
-                <th>Quantity</th>
-                <th>Category Name</th>
-                <th>Branch Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredBySearch.map((bookDetail) => (
-                <tr
+      </div>
+      <div className="col-md-9">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <Checkbox
+                  id=""
+                  name="all"
+                  value={selected.length === filteredBySearch.length}
+                  updateValue={selectAll}
+                >
+                  All
+                </Checkbox>
+              </th>
+              <th>Book Name</th>
+              <th>Import Price</th>
+              <th>Export Price</th>
+              <th>Quantity</th>
+              <th>Category Name</th>
+              <th>Branch Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentBooks.map((bookDetail) => (
+              <tr key={bookDetail.id}>
+                <td>
+                  <Checkbox
+                    id={bookDetail}
+                    key={bookDetail.id}
+                    name={bookDetail.bookDto.name}
+                    value={selected.includes(bookDetail)}
+                    updateValue={handleSelect}
+                  ></Checkbox>
+                </td>
+                <td
                   key={bookDetail.id}
                   onClick={() => handleRowClick(bookDetail.id)}
                   className="table-row"
                 >
-                  <td>{bookDetail.bookDto.name}</td>
-                  <td>{bookDetail.bookDto.importPrice}</td>
-                  <td>{bookDetail.bookDto.exportPrice}</td>
-                  <td>{bookDetail.quantity}</td>
-                  <td>{bookDetail.bookDto.categoryDto.name}</td>
-                  <td>{bookDetail.branchDto.name}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="row">
-            <div className="pagination">
-              {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                  key={index + 1}
-                  onClick={() => handlePageChange(index + 1)}
-                  className={`page-button ${currentPage === index + 1 ? "active" : ""
-                    }`}
-                >
-                  {index + 1}
-                </button>
-              ))}
-            </div>
+                  {bookDetail.bookDto.name}
+                </td>
+                <td>{bookDetail.bookDto.importPrice}</td>
+                <td>{bookDetail.bookDto.exportPrice}</td>
+                <td>{bookDetail.quantity}</td>
+                <td>{bookDetail.bookDto.categoryDto.name}</td>
+                <td>{bookDetail.branchDto.name}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="row">
+          <div className="pagination">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => handlePageChange(index + 1)}
+                className={`page-button ${
+                  currentPage === index + 1 ? "active" : ""
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
           </div>
         </div>
-        <div className="col-sm-0 col-md-2 col-lg-2"></div>
       </div>
+      <div className="col-sm-0 col-md-2 col-lg-2"></div>
     </div>
   );
 };
