@@ -54,25 +54,30 @@ function TabMenuBook() {
     navigate(tab.url);
   };
   return (
-    <div className="body container">
-      <div className="tab-inline">
-        {tabs.map((tab, i) => (
-          <div
-            key={i}
-            className="tab-item"
-            style={{
-              backgroundColor: currentTab === tab.id ? tab.bgcolor : undefined,
-              color: currentTab === tab.id ? tab.color : undefined,
-              
-            }}
-            onClick={() => handleTabClick(tab)}
-          >
-            {tab.tabTitle}
+    <div className="container">
+      <div className="row">
+        <div className="col-md-1"></div>
+        <div className="col-md-10">
+          <div className="tab-inline">
+            {tabs.map((tab, i) => (
+              <div
+                key={i}
+                className="tab-item"
+                style={{
+                  backgroundColor: currentTab === tab.id ? tab.bgcolor : undefined,
+                  color: currentTab === tab.id ? tab.color : undefined,
+
+                }}
+                onClick={() => handleTabClick(tab)}
+              >
+                {tab.tabTitle}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className="tab-content">
-        <Outlet />
+          <div className="tab-content">
+            <Outlet />
+          </div>
+        </div>
       </div>
     </div>
   );

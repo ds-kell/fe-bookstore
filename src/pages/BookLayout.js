@@ -5,9 +5,9 @@ import TabMenuBook from "./TabMenuBook";
 
 const BookLayout = () => {
   return (
-    <div>
+    <div className="body">
       <TabMenuBook />
-        </div>
+    </div>
   );
 };
 
