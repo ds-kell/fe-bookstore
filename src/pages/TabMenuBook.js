@@ -27,11 +27,11 @@ function TabMenuBook() {
     },
     {
       id: "3",
-      tabTitle: "Create proposal",
+      tabTitle: "Proposal",
       url: "/book/create-proposal",
       bgcolor: "#6A2A4B",
       color: "#ffffff",
-      visible: isManager,
+      visible: isManager || isAdmin,
     },
     {
       id: "4",
