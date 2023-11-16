@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react'
-
+import ShowPickingIn from './ShowPickingIn';
 
 function GetPickingIn() {
     const [listPickingIns, setListPickingIns] = useState([]);
@@ -29,7 +29,7 @@ function GetPickingIn() {
 
     return (
     <div>
-            {/* <ShowPickingIn listPickingIns={listPickingIns} /> */}
+            <ShowPickingIn data={listPickingIns} />
     </div>
     )
 }

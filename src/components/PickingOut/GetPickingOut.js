@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react'
+import ShowPickingOut from './ShowPickingOut';
 
 
 function GetPickingOut() {
@@ -15,7 +16,7 @@ function GetPickingOut() {
                 };
 
                 try {
-                    const response = await axios.get('http://localhost:8088/api/public/picking-out/all-picking-out', config);
+                    const response = await axios.get('http://localhost:8088/api/private/picking-out/all-picking-out', config);
                     setListPickingOuts(response.data.data);
                 } catch (error) {
                     console.error("Error fetching data:", error);
@@ -28,9 +29,9 @@ function GetPickingOut() {
     }, []);
 
     return (
-    <div>
-            {/* <ShowPickingOut listPickingOuts={listPickingOuts} /> */}
-    </div>
+        <div>
+            <ShowPickingOut data={listPickingOuts} />
+        </div>
     )
 }
 

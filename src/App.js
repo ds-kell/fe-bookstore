@@ -25,6 +25,8 @@ import PageMultiPostPickingIn from "./pages/PageMultiPostPickingIn";
 import PagePostStaff from "./pages/PagePostStaff";
 import PageExpense from "./pages/PageExpense";
 import StatisticLayout from "./pages/StatisticLayout";
+import PageGetPickingIn from "./pages/PageGetPickingIn";
+import PageGetPickingOut from "./pages/PageGetPickingOut";
 
 function App() {
   const { setToken, tokenStorage, token } = useToken();
@@ -79,8 +81,10 @@ function App() {
         <Route path="/branch" element={<Branch />} />
         <Route path="/profile" element={<Profile />} />
 
-        <Route path="/statistic/*" element={<StatisticLayout/>}>
+        <Route path="/statistic/*" element={<StatisticLayout />}>
           <Route path="expense" element={<PageExpense />} />
+          <Route path="view-picking-in" element={<PageGetPickingIn />} />
+          <Route path="view-picking-out" element={<PageGetPickingOut />} />
 
         </Route>
 
