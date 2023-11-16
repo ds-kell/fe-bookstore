@@ -30,11 +30,13 @@ function Navbar() {
                 <BsFillBookFill className="nav-icon" />
                 <span className="nav-element">Book</span>
               </Link>
-              <div style={{ display: isAdmin ? "block" : "none" }}>
-                <Link to="/staff" className="nav-item">
-                  <BsFillPeopleFill className="nav-icon" />
-                  <span className="nav-element">Staff</span>
-                </Link>
+              <div>
+                {(isAdmin || isManager) && (
+                  <Link to="/staff" className="nav-item">
+                    <BsFillPeopleFill className="nav-icon" />
+                    <span className="nav-element">Staff</span>
+                  </Link>
+                )}
               </div>
               <div>
                 {(isAdmin || isManager) && (

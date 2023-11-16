@@ -48,81 +48,81 @@ const ShowStaff = ({ listStaffs }) => {
     }
     setSelectedBranches(updatedBranches);
   };
+
+  const handleCreateStaff = () => {
+    navigate("create-staff")
+  }
   return (
-    <div className="">
-      <div className="row">
-        <div className="col-md-2 filter">
-          <div className="sidebar">
-            <div className="filter-group">
-              <div className="filter-title">
-                <MdOutlineFactory className="filter-icon" />
-                <h5>Branch</h5>
-              </div>
-              <div className="filter-item">
-                {branches.map((branch) => (
-                  <label key={branch} className="checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={selectedBranches.includes(branch)}
-                      onChange={() => handleBranchChange(branch)}
-                    />
-                    {branch}
-                  </label>
-                ))}
-              </div>
-            </div>
+    <div className="row">
+      <div className="col-md-2 filter">
+        <div className="filter-branch">
+          <div className="filter-title">
+            <MdOutlineFactory className="filter-icon" />
+            <h5>Branch</h5>
+          </div>
+          <div className="filter-item">
+            {branches.map((branch) => (
+              <label key={branch} className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={selectedBranches.includes(branch)}
+                  onChange={() => handleBranchChange(branch)}
+                />
+                {branch}
+              </label>
+            ))}
           </div>
         </div>
-        <div className="col-md-8">
-          <table className="staff-table">
-            <thead>
-              <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Branch</th>
-                <th>Full Name</th>
-                <th>Address</th>
-                {/* <th>Date of Birth</th> */}
+      </div>
+      <div className="col-md-8">
+        <table className="staff-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Branch</th>
+              <th>Full Name</th>
+              <th>Address</th>
+              {/* <th>Date of Birth</th> */}
+            </tr>
+          </thead>
+          <tbody>
+            {currentStaffs.map((staff) => (
+              <tr
+                key={staff.id}
+                onClick={() => handleRowClick(staff.id)}
+                className="table-row"
+              >
+                <td>{staff.username || ""}</td>
+                <td>{staff.email || ""}</td>
+                <td>{staff.authorities ? staff.authorities : ""}</td>
+                <td>{staff.branch ? staff.branch.name || "" : ""}</td>
+                <td>{staff.fullName || ""}</td>
+                <td>{staff.address || ""}</td>
+                {/* <td>{staff.dob ? new Date(staff.dob).toDateString() : ''}</td> */}
               </tr>
-            </thead>
-            <tbody>
-              {currentStaffs.map((staff) => (
-                <tr
-                  key={staff.id}
-                  onClick={() => handleRowClick(staff.id)}
-                  className="table-row"
-                >
-                  <td>{staff.username || ""}</td>
-                  <td>{staff.email || ""}</td>
-                  <td>{staff.authorities ? staff.authorities : ""}</td>
-                  <td>{staff.branch ? staff.branch.name || "" : ""}</td>
-                  <td>{staff.fullName || ""}</td>
-                  <td>{staff.address || ""}</td>
-                  {/* <td>{staff.dob ? new Date(staff.dob).toDateString() : ''}</td> */}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="row">
-            <div className="pagination">
-              {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                  key={index + 1}
-                  onClick={() => handlePageChange(index + 1)}
-                  className={`page-button ${
-                    currentPage === index + 1 ? "active" : ""
-                  }`}
-                >
-                  {index + 1}
-                </button>
-              ))}
-            </div>
+            ))}
+          </tbody>
+        </table>
+        <div className="row">
+          <div className="pagination">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => handlePageChange(index + 1)}
+                className={`page-button ${
+                  currentPage === index + 1 ? "active" : ""
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
           </div>
         </div>
-        <div className="col-md-2">
-          <Button className="btn-staff">Add new staff</Button>
-        </div>
+      </div>
+      <div className="col-md-2">
+        <Button className="btn-staff" onClick={handleCreateStaff}>Add new staff</Button>
       </div>
     </div>
   );

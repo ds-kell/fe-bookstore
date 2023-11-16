@@ -49,7 +49,6 @@ function PostBook() {
       { name: "", importPrice: 0, exportPrice: 0, categoryId: 1 },
     ]);
 
-    // Add a default selected category for the new book request
     setSelectedCategories([...selectedCategories, null]);
   };
 

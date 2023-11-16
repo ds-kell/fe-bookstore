@@ -22,6 +22,7 @@ import Category from "./pages/Category";
 import PageMultiPostPickingOut from "./pages/PageMultiPostPickingOut";
 import PageMultiPostProposal from "./pages/PageMultiPostProposal";
 import PageMultiPostPickingIn from "./pages/PageMultiPostPickingIn";
+import PagePostStaff from "./pages/PagePostStaff";
 
 function App() {
   const { setToken, tokenStorage, token } = useToken();
@@ -70,6 +71,7 @@ function App() {
         />
 
         <Route path="/staff" element={<Staff />} />
+        <Route path="/staff/create-staff" element={<PagePostStaff />} />
         <Route path="/staff/:userId" element={<StaffInfo />} />
 
         <Route path="/branch" element={<Branch />} />
