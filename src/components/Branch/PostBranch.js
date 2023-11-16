@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./branch.css";
 import { Button } from "antd";
+import CustomModal from '../CustomModal'
+import Select from "react-select";
+
 
 function PostBranch() {
   const accessToken = localStorage.getItem("token");
@@ -22,7 +25,15 @@ function PostBranch() {
       [field]: value,
     });
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [responeMessage, setResponseMessage] = useState("");
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const handleSubmit = async () => {
     try {
       config = {
@@ -35,6 +46,10 @@ function PostBranch() {
         branchRequest,
         config
       );
+      if (response.data.statusCode === 200) {
+        setIsModalOpen(true)
+        setResponseMessage(response.data.message)
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -42,29 +57,38 @@ function PostBranch() {
 
   return (
     <div className="post-branch">
-      {isAdmin && (
-        <center>
-          <h5>Create Branch</h5>
-          <input
-            type="text"
-            placeholder="Branch Name"
-            value={branchRequest.name}
-            onChange={(e) => handleChange("name", e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Address"
-            value={branchRequest.address}
-            onChange={(e) => handleChange("address", e.target.value)}
-          />
-          <div className="btn-picking-out">
-            <Button className="btn-antd" onClick={handleSubmit}>
-              Submit
-            </Button>
-          </div>
-        </center>
-      )}
-    </div>
+      <div>
+        {isAdmin && (
+          <center>
+            <h5>Create Branch</h5>
+            <input
+              type="text"
+              placeholder="Branch Name"
+              value={branchRequest.name}
+              onChange={(e) => handleChange("name", e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Address"
+              value={branchRequest.address}
+              onChange={(e) => handleChange("address", e.target.value)}
+            />
+            <div className="btn-picking-out">
+              <Button className="btn-antd" onClick={handleSubmit}>
+                Submit
+              </Button>
+            </div>
+          </center>
+        )}
+      </div>
+      <div>
+        <CustomModal
+          isOpen={isModalOpen}
+          onRequestClose={closeModal}
+          contentLabel="Notify"
+          message={responeMessage} />
+      </div>
+    </div >
   );
 }
 export default PostBranch;

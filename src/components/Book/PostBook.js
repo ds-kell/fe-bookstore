@@ -3,11 +3,13 @@ import axios from "axios";
 import "./book.css";
 import { Button } from "antd";
 import Select from "react-select";
+import CustomModal from '../CustomModal'
 
 function PostBook() {
   const accessToken = localStorage.getItem("token");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [listCategories, setListCategories] = useState([]);
+ 
   const [bookRequests, setBookRequests] = useState([
     { name: "", importPrice: 0, exportPrice: 0, categoryId: 0 },
   ]);
@@ -69,7 +71,10 @@ function PostBook() {
         bookRequests,
         config
       );
-      console.log(response.data);
+      if (response.data.statusCode === 200) {
+        setIsModalOpen(true)
+        setResponseMessage(response.data.message)
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -81,6 +86,17 @@ function PostBook() {
       flex: 1,
     }),
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [responeMessage, setResponseMessage] = useState("");
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
   return (
     <div className="">
       <div className="row">
@@ -149,6 +165,11 @@ function PostBook() {
           <Button className="btn-antd" onClick={handleSubmit}>
             Submit
           </Button>
+          <CustomModal
+            isOpen={isModalOpen}
+            onRequestClose={closeModal}
+            contentLabel="Notify"
+            message={responeMessage} />
         </div>
       </div>
     </div>

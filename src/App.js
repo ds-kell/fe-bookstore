@@ -23,6 +23,7 @@ import PageMultiPostPickingOut from "./pages/PageMultiPostPickingOut";
 import PageMultiPostProposal from "./pages/PageMultiPostProposal";
 import PageMultiPostPickingIn from "./pages/PageMultiPostPickingIn";
 import PagePostStaff from "./pages/PagePostStaff";
+import PageStatistic from "./pages/PageStatistic";
 
 function App() {
   const { setToken, tokenStorage, token } = useToken();
@@ -76,6 +77,9 @@ function App() {
 
         <Route path="/branch" element={<Branch />} />
         <Route path="/profile" element={<Profile />} />
+
+        <Route path="/statistic" element={<PageStatistic/>} />
+
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/signup" element={<SignUp setToken={setToken} />} />
       </Routes>
