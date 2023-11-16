@@ -39,6 +39,12 @@ function PostStaff() {
     label: branch.name,
   }));
 
+  const roleOptions = [
+    { value: "ADMIN", value: "ADMIN" },
+    { value: "MANAGER", value: "MANAGER" },
+    { value: "STAFF", value: "STAFF" },
+  ];
+
   let config = {};
   const [userData, setUserData] = useState({
     username: "",
@@ -58,6 +64,7 @@ function PostStaff() {
     });
   };
   const [selectedBranch, setSelectedBranch] = useState(null);
+  const [selectedRole, setSelectedRole] = useState(null);
 
   const handleBranchSelect = (branch) => {
     setSelectedBranch(branch);
@@ -67,6 +74,13 @@ function PostStaff() {
     });
   };
 
+  const handleRoleSelect = (role) => {
+    setSelectedRole(role);
+    setUserData({
+      ...userData,
+      role: role ? role : "NONE",
+    });
+  };
   const handleSubmitUser = async () => {
     try {
       config = {
