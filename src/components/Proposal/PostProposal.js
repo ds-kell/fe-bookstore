@@ -66,7 +66,7 @@ function PostProposal() {
             };
             console.log(proposalRequest);
             const response = await axios.post("http://localhost:8088/api/private/proposal/create-proposal", proposalRequest, config);
-            console.log(response);
+            console.log(response.data);
 
         } catch (error) {
             console.error("Error submitting form:", error);
