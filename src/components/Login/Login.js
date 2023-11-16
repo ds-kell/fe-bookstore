@@ -56,6 +56,7 @@ export default function Login({ setToken }) {
   useEffect(() => {
     if (shouldNavigate) {
       navigate("/home");
+      window.location.reload(); 
     }
   }, [shouldNavigate, navigate]);
 

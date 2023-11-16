@@ -5,9 +5,12 @@ import "./booktable.css";
 import { Button } from "antd";
 
 const BookTable = ({ data }) => {
+  const role = localStorage.getItem("role");
+  const isAdmin = role === "ADMIN";
+  const isManager = role === "MANAGER";
+
   const [expandedRows, setExpandedRows] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
-
   const [filteredData, setFilteredData] = useState(data);
 
   const navigate = useNavigate();
@@ -32,7 +35,9 @@ const BookTable = ({ data }) => {
   };
 
   const handleNestedRowClick = (bookDetailId) => {
-    navigate(`/book/detail/${bookDetailId}`);
+    if (!isAdmin) {
+      navigate(`/book/detail/${bookDetailId}`);
+    }
   };
   const handleRowClick = (bookId) => {
     // navigate(`${bookId}`);

@@ -5,15 +5,15 @@ import { Checkbox } from "../../pages/Checkbox";
 import { Button } from "antd";
 import EditProposalRq from "./EditProposalRq";
 
-const accessToken = localStorage.getItem("token");
-const config = {
-  method: "GET",
-  headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
-};
 
 function MultiPostProposal() {
   const [listBooks, setListBooks] = useState([]);
-
+  const accessToken = localStorage.getItem("token");
+  const config = {
+    method: "GET",
+    headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
+  };
+  
   useEffect(() => {
     async function fetchData() {
       if (accessToken) {

@@ -94,8 +94,7 @@ tr:nth-child(odd) {
   margin: 10px 0 10px 0;
 }
 .create-book-block input{
-  padding: 5px;
-  height: 40px;
+  padding: 5px 5px 5px 10px;
   margin: 0 10px 0 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -111,4 +110,14 @@ tr:nth-child(odd) {
 }
 .filter-group{
   margin: 0 0 20px 0;
+}
+
+.select-category{
+  width: 200px;
+  height: 10px;
+  margin-left: 20px;
+}
+
+.block-selection{
+  display: flex;
 }

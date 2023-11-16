@@ -6,7 +6,7 @@ import './style.css'
 class PagePostBook extends React.Component {
   render() {
     return (
-      <div className='body'>
+      <div className=''>
         <PostBook />
       </div>
     )

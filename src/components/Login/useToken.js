@@ -25,6 +25,7 @@ export default function useToken() {
     setTokenStorage(userTokenString);
 
     localStorage.setItem('tokenStorage', userTokenString);
+    localStorage.setItem('role', userToken.data.role);
     localStorage.setItem('token', JSON.stringify(userToken.data.accessToken));
   };
 

@@ -5,15 +5,14 @@ import EditPickingIn from "./EditPickingIn.js";
 import { Checkbox } from "../../pages/Checkbox";
 import { Button } from "antd";
 
-const accessToken = localStorage.getItem("token");
-const config = {
-  method: "GET",
-  headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
-};
-
 function MultiPostPickingIn() {
   const [listBooks, setListBooks] = useState([]);
-
+  const accessToken = localStorage.getItem("token");
+  const config = {
+    method: "GET",
+    headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
+  };
+  
   useEffect(() => {
     async function fetchData() {
       if (accessToken) {

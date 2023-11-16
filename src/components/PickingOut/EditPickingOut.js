@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Button } from "antd";
 import axios from "axios";
 
-const accessToken = localStorage.getItem("token");
-let config = {};
-
 const EditPickingOut = ({ data }) => {
+  const accessToken = localStorage.getItem("token");
+  let config = {};
+
   const [pickingOutRequest, setPickingOutRequest] = useState({
     customerName: "",
     customerPhone: "",

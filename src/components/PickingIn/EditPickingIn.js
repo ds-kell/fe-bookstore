@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Button } from "antd";
 import axios from "axios";
 
-const accessToken = localStorage.getItem("token");
-let config = {};
-
 const EditPickingIn = ({ data }) => {
+  const accessToken = localStorage.getItem("token");
+  let config = {};
   const [pickingInRequest, setPickingInRequest] = useState({
     total: 0,
     date: new Date().toISOString(),

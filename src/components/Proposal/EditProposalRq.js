@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Button } from "antd";
 import axios from "axios";
 
-const accessToken = localStorage.getItem("token");
-let config = {};
-
 const EditProposalRq = ({ data }) => {
+  const accessToken = localStorage.getItem("token");
+  let config = {};
+
   const [proposalRequest, setProposalRequest] = useState({
     date: new Date().toISOString(),
     listBookRq: Array.from({ length: data.length }, () => ({
@@ -44,11 +44,12 @@ const EditProposalRq = ({ data }) => {
         headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
       };
       console.log(proposalRequest);
-        const response = await axios.post(
-          "http://localhost:8088/api/private/proposal/create-proposal",proposalRequest,
-          config
-        );
-        console.log(response.data)
+      const response = await axios.post(
+        "http://localhost:8088/api/private/proposal/create-proposal",
+        proposalRequest,
+        config
+      );
+      console.log(response.data);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -78,9 +79,7 @@ const EditProposalRq = ({ data }) => {
                       placeholder="Quantity"
                       defaultValue={1}
                       min={1}
-                      value={
-                        proposalRequest.listBookRq[index]?.quantity || ""
-                      }
+                      value={proposalRequest.listBookRq[index]?.quantity || ""}
                       onChange={(e) =>
                         handleQuantityChange(
                           index,

@@ -4,14 +4,13 @@ import ShowBook from "../Book/ShowBook";
 import "./pickingout.css";
 import EditPickingOut from "./EditPickingOut";
 
-const accessToken = localStorage.getItem("token");
-const config = {
-  method: "GET",
-  headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
-};
-
 function MultiPostPickingOut() {
   const [listBooks, setListBooks] = useState([]);
+  const accessToken = localStorage.getItem("token");
+  const config = {
+    method: "GET",
+    headers: { Authorization: "Bearer " + accessToken.slice(1, -1) },
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -33,7 +32,7 @@ function MultiPostPickingOut() {
   }, []);
 
   const [listBookPickingOut, setListBookPickingOut] = useState([]);
-  
+
   return (
     <div className="row">
       <div className="col-md-10">

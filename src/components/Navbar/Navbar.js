@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsFillBookFill, BsFillPeopleFill } from "react-icons/bs";
 import { FcStatistics } from "react-icons/fc";
-import {Button} from "antd"
+import { Button } from "antd";
 import "./navbar.css";
 
 function Navbar() {
   const accessToken = localStorage.getItem("token");
   const username = localStorage.getItem("username");
+  const role = localStorage.getItem("role");
+  const isAdmin = role === "ADMIN";
+  const isManager = role === "MANAGER";
+
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear("token");
@@ -15,7 +19,7 @@ function Navbar() {
 
   return (
     <div>
-      {accessToken === null ? null :
+      {accessToken === null ? null : (
         <div className="menu-bar">
           <nav className="navbar">
             <div className="container">
@@ -26,18 +30,28 @@ function Navbar() {
                 <BsFillBookFill className="nav-icon" />
                 <span className="nav-element">Book</span>
               </Link>
-              <Link to="/branch" className="nav-item">
-                <BsFillPeopleFill className="nav-icon" />
-                <span className="nav-element">Branch</span>
-              </Link>
-              <Link to="/staff" className="nav-item">
-                <BsFillPeopleFill className="nav-icon" />
-                <span className="nav-element">Staff</span>
-              </Link>
-              <Link to="/statistic" className="nav-item">
-                <FcStatistics className="nav-icon" />
-                <span className="nav-element">Statistic</span>
-              </Link>
+              <div style={{ display: isAdmin ? "block" : "none" }}>
+                <Link to="/staff" className="nav-item">
+                  <BsFillPeopleFill className="nav-icon" />
+                  <span className="nav-element">Staff</span>
+                </Link>
+              </div>
+              <div>
+                {(isAdmin || isManager) && (
+                  <Link to="/branch" className="nav-item">
+                    <BsFillPeopleFill className="nav-icon" />
+                    <span className="nav-element">Branch</span>
+                  </Link>
+                )}
+              </div>
+              <div>
+                {(isAdmin || isManager) && (
+                  <Link to="/statistic" className="nav-item">
+                    <FcStatistics className="nav-icon" />
+                    <span className="nav-element">Statistic</span>
+                  </Link>
+                )}
+              </div>
               <div className="nav-search">
                 <form className="form-inline">
                   <input
@@ -57,7 +71,8 @@ function Navbar() {
               </div>
             </div>
           </nav>
-        </div>}
+        </div>
+      )}
     </div>
   );
 }

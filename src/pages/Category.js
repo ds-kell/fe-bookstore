@@ -7,7 +7,7 @@ import "./style.css";
 class Category extends React.Component {
   render() {
     return (
-      <div className="body">
+      <div className="">
         <div className="row">
           <div className="col-md-6">
             <GetCategory />

@@ -5,6 +5,7 @@ import PostBranch from "../components/Branch/PostBranch";
 import "./style.css";
 
 class Branch extends React.Component {
+
   render() {
     return (
       <div className="body">

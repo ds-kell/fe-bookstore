@@ -13,7 +13,7 @@ const ShowProfile = ({ profile }) => {
     setStatusEdit(!statusEdit);
   };
   const handleUpdate = () => {
-    profile.dob = dob
+    profile.dob = dob;
     setStatusEdit(false);
   };
 
@@ -24,10 +24,12 @@ const ShowProfile = ({ profile }) => {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.clear('token');
-    localStorage.clear('userToken');
-    navigate('/login');
-  }
+    localStorage.clear("token");
+    localStorage.clear("userToken");
+    localStorage.clear("role");
+    navigate("/login");
+
+  };
 
   return (
     <div className="">
@@ -95,11 +97,7 @@ const ShowProfile = ({ profile }) => {
           >
             Save
           </Button>
-          <Button
-            className="btn-antd"
-            onClick={logout}
-            htmlType="submit"
-          >
+          <Button className="btn-antd" onClick={logout} htmlType="submit">
             Logout
           </Button>
         </div>

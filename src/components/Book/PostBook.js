@@ -75,37 +75,57 @@ function PostBook() {
       console.error("Error submitting form:", error);
     }
   };
-
+  const customStyles = {
+    control: (base) => ({
+      ...base,
+      width: 200,
+      flex: 1,
+    }),
+  };
   return (
     <div className="">
       <div className="row">
         <div>
           {bookRequests.map((request, index) => (
             <div className="create-book-block" key={index}>
+              <label htmlFor={`bookName${index}`}>Book Name</label>
               <input
                 type="text"
+                id={`bookName${index}`}
                 placeholder="Book Name"
                 value={request.name}
                 onChange={(e) => handleChange(index, "name", e.target.value)}
               />
+
+              <label htmlFor={`importPrice${index}`}>Import Price</label>
               <input
                 type="number"
+                id={`importPrice${index}`}
                 placeholder="Import price"
                 value={request.importPrice}
                 onChange={(e) =>
                   handleChange(index, "importPrice", e.target.value)
                 }
               />
+
+              <label htmlFor={`exportPrice${index}`}>Export Price</label>
               <input
                 type="number"
+                id={`exportPrice${index}`}
                 placeholder="Export price"
                 value={request.exportPrice}
                 onChange={(e) =>
                   handleChange(index, "exportPrice", e.target.value)
                 }
               />
-              <div className="select-category">
+
+              <div className="block-selection">
+                <label htmlFor={`selectCategory${index}`}>
+                  Select Category
+                </label>
                 <Select
+                  id={`selectCategory${index}`}
+                  className="select-category"
                   defaultValue={selectedCategories[index]}
                   onChange={(selectedCategory) =>
                     handleCategorySelect(selectedCategory, index)
@@ -114,6 +134,9 @@ function PostBook() {
                     (option) =>
                       option.value === selectedCategories[index]?.value
                   )}
+                  isSearchable
+                  isClearable
+                  styles={customStyles}
                   options={categoryOptions}
                 />
               </div>
